@@ -106,6 +106,13 @@ async function team(action, body={}){
 function loginView(){
   header("عملاء دبي");
   view.innerHTML = "";
+  if (isIOS && !standalone) {
+    view.innerHTML = `<div class="center card"><h2 style="margin-top:0">📲 خطوة واحدة قبل الدخول</h2>
+      <p>على الآيفون لازم تضيف التطبيق للشاشة الرئيسية <b>الأول</b>، وبعدين تدخل الكود من جوه التطبيق.</p>
+      <ol style="line-height:2"><li>دوس زرار <b>المشاركة</b> ⬆️ تحت في Safari</li><li>اختار <b>Add to Home Screen</b> (إضافة إلى الشاشة الرئيسية)</li><li>افتح <b>عملاء دبي</b> من الشاشة الرئيسية ودخّل الكود هناك</li></ol>
+      <p style="color:var(--mut);font-size:13px">متدخلش الكود هنا في Safari، لأن الكود بيشتغل مرة واحدة بس.</p></div>`;
+    return;
+  }
   const v = $(`<div class="center card">
     <h2 style="margin-top:0">أهلاً 👋</h2>
     <p style="color:var(--mut);font-size:14px;margin-top:0">اكتب كود الدعوة والباسورد اللي وصلوك.</p>

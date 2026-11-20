@@ -457,7 +457,6 @@ async function leadView(id){
     const prev = l.next_follow_up ? new Date(l.next_follow_up).getTime() : null, nf = f ? new Date(f).getTime() : null;
     if (nf && nf !== prev && nf < Date.now() - 60000) { alert(t("pastDate")); return; }
     const upd = { next_follow_up: nf ? new Date(nf).toISOString() : null };
-    if (nf && nf !== prev && l.status === "new") upd.status = "contacted";
     await sb.from("leads").update(upd).eq("id",id);
     if (body) await sb.from("lead_notes").insert({ lead_id:id, body, author:me.user_id });
     await loadLeads();

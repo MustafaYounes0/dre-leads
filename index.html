@@ -41,6 +41,9 @@ main{padding:12px;max-width:640px;margin:0 auto}
 .n{font-weight:700;font-size:15px}
 .s{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;border:1px solid #0b1f3a;color:#0b1f3a;background:#fff}
+.pill.late{background:#fdecec;color:#a61b1b;border-color:#f3c2c2}
+select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230b1f3a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat;background-position:right 12px center}
+[dir=rtl] select{background-position:left 12px center}
 .pill.new{background:#0b1f3a;color:#fff}
 .pill.lost,.pill.broker{border-color:#bbb;color:#888}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
@@ -54,7 +57,7 @@ main{padding:12px;max-width:640px;margin:0 auto}
 .st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px;color:#0b1f3a;font-family:inherit}
 .st button.on{background:#0b1f3a;color:#fff;border-color:#0b1f3a}
-input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px;color:#0b1f3a}
+input,textarea,select{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px;color:#0b1f3a}
 textarea{min-height:70px}
 label{font-size:13px;color:var(--mut)}
 .note{border-inline-start:3px solid #0b1f3a;padding:6px 10px;margin:8px 0;background:var(--soft);border-radius:6px;font-size:14px}
@@ -140,9 +143,10 @@ const T = {
   pushDenied:"الإشعارات مغلقة. فعّلها من إعدادات الهاتف لهذا التطبيق.",
   pushNeedPerm:"يجب السماح بالإشعارات من إعدادات الهاتف.",
   bioOffer:"هل تريد فتح التطبيق ببصمة الوجه أو الإصبع على هذا الجهاز؟", enable:"تفعيل", notNow:"ليس الآن", bioFail:"تعذّر التفعيل، جرّب من الإعدادات.",
-  tabs:{new:"جديد",all:"الكل",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسطاء",followup:"متابعة اليوم"},
+  tabs:{new:"جديد",all:"الكل",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسطاء",followup:"المتابعات"},
   status:{new:"جديد",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسيط"},
   noLeads:"لا يوجد عملاء هنا بعد.", noName:"بدون اسم",
+  owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
   leadTitle:"تفاصيل العميل", call:"اتصال", whatsapp:"واتساب", stat:"الحالة",
   brokerWarn:"اختار هذا العميل أنه وسيط عقاري.", email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
   followup:"موعد المتابعة القادم", newNote:"ملاحظة جديدة", notePh:"مثال: الميزانية 700 ألف، يريد استوديو جاهزًا، المعاينة يوم الخميس.", save:"حفظ", notFound:"العميل غير موجود.",
@@ -174,9 +178,10 @@ const T = {
   pushDenied:"Notifications are blocked. Allow them for this app in your phone settings.",
   pushNeedPerm:"Please allow notifications in your phone settings.",
   bioOffer:"Unlock the app with Face ID / fingerprint on this device?", enable:"Enable", notNow:"Not now", bioFail:"Couldn't enable. Try again from Settings.",
-  tabs:{new:"New",all:"All",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Brokers",followup:"Follow up today"},
+  tabs:{new:"New",all:"All",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Brokers",followup:"Follow-ups"},
   status:{new:"New",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Broker"},
   noLeads:"No leads here yet.", noName:"No name",
+  owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
   leadTitle:"Lead details", call:"Call", whatsapp:"WhatsApp", stat:"Status",
   brokerWarn:"This lead said they are a real-estate broker.", email:"Email", source:"Source", time:"Submitted",
   followup:"Next follow-up", newNote:"New note", notePh:"e.g. Budget 700K, wants a ready studio, viewing on Thursday.", save:"Save", notFound:"Lead not found.",
@@ -207,7 +212,7 @@ const errMsg = (e)=> T[LANG].errors[e?.message] || T[LANG].errors.generic;
 const $ = (h) => { const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstElementChild; };
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const view = document.getElementById("view");
-let me = null, leads = [], filter = "new", channel = null;
+let me = null, leads = [], members = [], filter = "new", channel = null;
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
@@ -305,6 +310,7 @@ async function start(fresh=false){
   const { data: m } = await sb.from("members").select("*").eq("user_id", session.user.id).maybeSingle();
   if (!m || !m.active) { await sb.auth.signOut(); return loginView(); }
   me = m;
+  { const { data: ms } = await sb.from("members").select("user_id,display_name,active"); members = ms || []; }
   if (bioOn() && !sessionStorage.getItem("unlocked")) return lockView();
   if (fresh && !bioOn() && await bioAvailable()) sessionStorage.setItem("offerBio","1");
   await loadLeads();
@@ -354,6 +360,7 @@ async function route(){
   if (h === "team" && me.role==="admin") return teamView();
   if (h.startsWith("lead/")) return leadView(h.slice(5));
   if (h === "settings") return settingsView();
+  if (h === "followups") { filter = "followup"; history.replaceState(null,"",location.pathname); }
   listView();
 }
 async function banners(){
@@ -367,6 +374,41 @@ async function banners(){
   if (st==="denied") return out + `<div class="banner">${t("pushDenied")}</div>`;
   return out + `<div class="banner"><span class="lbl">${ic("bell")}${t("pushOffer")}</span><button class="btn" id="pushOn" style="margin-top:10px;width:100%">${ic("bell")}${t("pushEnable")}</button></div>`;
 }
+
+const ownerName = (id)=> (members.find(m=>m.user_id===id)||{}).display_name || "";
+const dt = (x)=> new Date(x).toLocaleString(LANG==="ar"?"ar-EG":"en-GB",{weekday:"short",day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
+function leadCard(l, extra=""){
+  const sub = Object.values(l.answers||{}).slice(0,2).join(" · ");
+  const ow = l.assigned_to ? ownerName(l.assigned_to) : "";
+  return `<div class="card lead" data-id="${l.id}"><div class="av">${initial(l.full_name)}</div>
+    <div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s">${esc(sub||l.phone)}</div>${extra}${ow?`<div class="s lbl" style="margin-top:2px">${ic("user",12)}${esc(ow)}</div>`:""}</div>
+    <div style="text-align:end"><span class="pill ${l.status}">${T[LANG].status[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
+}
+function followupsHtml(){
+  let who = "all"; try { who = sessionStorage.getItem("who") || "all"; } catch {}
+  const fl = leads.filter(l => l.next_follow_up && !["won","lost","broker"].includes(l.status)
+      && (who==="all" || (who==="me" ? l.assigned_to===me.user_id : l.assigned_to===who)))
+    .sort((a,b)=> new Date(a.next_follow_up) - new Date(b.next_follow_up));
+  const sod = new Date(); sod.setHours(0,0,0,0); const DAY = 86400000, now = Date.now();
+  const order = ["overdue","today","tomorrow","dayAfter","thisWeek","later"], groups = {};
+  for (const l of fl){
+    const d = new Date(l.next_follow_up); let k;
+    if (d < sod) k = "overdue"; else { const n = Math.floor((d - sod)/DAY); k = n===0?"today":n===1?"tomorrow":n===2?"dayAfter":n<7?"thisWeek":"later"; }
+    (groups[k] ||= []).push(l);
+  }
+  const sel = `<div class="card"><label class="lbl">${ic("users",15)}${t("showFor")}</label><select id="who" style="margin-bottom:0">
+    <option value="all" ${who==="all"?"selected":""}>${t("whoAll")}</option><option value="me" ${who==="me"?"selected":""}>${t("mine")}</option>
+    ${members.filter(m=>m.active && m.user_id!==me.user_id).map(m=>`<option value="${m.user_id}" ${who===m.user_id?"selected":""}>${esc(m.display_name)}</option>`).join("")}</select></div>`;
+  if (!fl.length) return sel + `<div class="empty">${ic("calendar",36)}${t("noFollow")}</div>`;
+  return sel + order.filter(k=>groups[k]).map(k=>`<h3 class="hd" style="margin:16px 4px 8px">${ic(k==="overdue"?"alert":"calendar",18)}${t(k)} <span class="count">${groups[k].length}</span></h3>` +
+    groups[k].map(l=>{
+      const d = new Date(l.next_follow_up);
+      let extra = `<div class="s lbl" style="margin-top:2px">${ic("clock",12)}${dt(l.next_follow_up)}</div>`;
+      if (d.getTime() < now){ const n = Math.floor((sod - new Date(d).setHours(0,0,0,0))/DAY);
+        extra += `<div style="margin-top:4px"><span class="pill late">${n>0?fmt(t("daysLate"),{n}):t("lateToday")}</span></div>`; }
+      return leadCard(l, extra);
+    }).join("")).join("");
+}
 async function listView(){
   header("");
   const tb = T[LANG].tabs;
@@ -376,13 +418,9 @@ async function listView(){
   counts.followup = leads.filter(due).length;
   const list = leads.filter(l => filter==="all" ? true : filter==="followup" ? due(l) : l.status===filter);
   const keys = ["new","all","contacted","no_answer","interested","viewing","won","lost","broker","followup"];
-  view.innerHTML = (await banners()) + `<div class="tabs">${keys.map(k=>`<button data-f="${k}" class="${filter===k?"on":""}">${tb[k]}${(k==="new"||k==="followup")&&counts[k]?`<span class="count">${counts[k]}</span>`:""}</button>`).join("")}</div>`
-    + (list.length ? list.map(l=>{
-      const sub = Object.values(l.answers||{}).slice(0,2).join(" · ");
-      return `<div class="card lead" data-id="${l.id}"><div class="av">${initial(l.full_name)}</div>
-        <div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s">${esc(sub||l.phone)}</div></div>
-        <div style="text-align:end"><span class="pill ${l.status}">${T[LANG].status[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
-    }).join("") : `<div class="empty">${ic("inbox",36)}${t("noLeads")}</div>`);
+  const tabsHtml = `<div class="tabs">${keys.map(k=>`<button data-f="${k}" class="${filter===k?"on":""}">${tb[k]}${(k==="new"||k==="followup")&&counts[k]?`<span class="count">${counts[k]}</span>`:""}</button>`).join("")}</div>`;
+  view.innerHTML = (await banners()) + tabsHtml + (filter==="followup" ? followupsHtml() : (list.length ? list.map(l=>leadCard(l)).join("") : `<div class="empty">${ic("inbox",36)}${t("noLeads")}</div>`));
+  const w = view.querySelector("#who"); if (w) w.onchange = ()=>{ try{sessionStorage.setItem("who",w.value);}catch{} listView(); };
   view.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f; listView();});
   view.querySelectorAll(".lead").forEach(c=>c.onclick=()=>{location.hash="lead/"+c.dataset.id;});
   const p = view.querySelector("#pushOn"); if(p) p.onclick = enablePush;
@@ -407,11 +445,13 @@ async function leadView(id){
     ${l.email?`<div class="kv"><b>${t("email")}</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
     <div class="kv"><b>${ic("info",15)}${t("source")}</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
     <div class="kv"><b>${ic("clock",15)}${t("time")}</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</span></div></div>
-  <div class="card"><label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
+  <div class="card"><label class="lbl">${ic("user",15)}${t("owner")}</label><select id="ow"><option value="">${t("unassigned")}</option>${members.filter(m=>m.active||m.user_id===l.assigned_to).map(m=>`<option value="${m.user_id}" ${l.assigned_to===m.user_id?"selected":""}>${esc(m.display_name)}</option>`).join("")}</select>
+    <label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
     <label class="lbl">${ic("note",15)}${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
     <button class="btn" id="save" style="width:100%">${ic("check")}${t("save")}</button>
     ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
   view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); await loadLeads(); });
+  view.querySelector("#ow").onchange = async (e) => { await sb.from("leads").update({ assigned_to: e.target.value || null }).eq("id",id); await loadLeads(); };
   view.querySelector("#save").onclick = async () => {
     const body = view.querySelector("#nt").value.trim(); const f = view.querySelector("#fu").value;
     await sb.from("leads").update({ next_follow_up: f ? new Date(f).toISOString() : null }).eq("id",id);

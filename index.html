@@ -3,62 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b2a5b">
+<meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="عملاء دبي">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Y CRM">
+<meta name="application-name" content="Y CRM">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
-<title>عملاء دبي</title>
+<title>Y CRM</title>
 <style>
-:root{--bg:#f4f6fa;--card:#fff;--ink:#16202f;--mut:#6b7486;--pri:#1f6feb;--navy:#0b2a5b;--line:#e4e8ef;--ok:#137333;--warn:#b06000;--bad:#c5221f}
+:root{--bg:#f5f5f5;--card:#fff;--ink:#000;--mut:#6b6b6b;--line:#e3e3e3;--soft:#f0f0f0}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom)}
-header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
-header h1{font-size:18px;margin:0;flex:1}
-header button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:10px;padding:8px 10px;font-size:13px}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Helvetica Neue",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:5;background:#000;color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
+.logo{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:-.03em;font-size:21px;direction:ltr}
+header h1{font-size:18px;margin:0;flex:1;font-weight:700}
+header button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:7px 11px;font-size:13px}
 main{padding:12px;max-width:640px;margin:0 auto}
-.card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
 .tabs button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 12px;font-size:13px;color:var(--ink)}
-.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.tabs button.on{background:#000;color:#fff;border-color:#000}
+.count{display:inline-block;min-width:18px;margin-inline-start:6px;padding:0 5px;border-radius:9px;background:#000;color:#fff;font-size:11.5px;text-align:center}
+.tabs button.on .count{background:#fff;color:#000}
 .lead{display:flex;gap:10px;align-items:center}
-.lead .av{width:42px;height:42px;border-radius:50%;background:#e8effc;color:var(--pri);display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
-.lead .t{flex:1;min-width:0}
-.lead .n{font-weight:700;font-size:15px}
-.lead .s{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;background:#eef1f6;color:var(--mut)}
-.pill.new{background:#e8f0fe;color:var(--pri)}.pill.won{background:#e6f4ea;color:var(--ok)}.pill.lost,.pill.broker{background:#fce8e6;color:var(--bad)}.pill.interested,.pill.viewing{background:#fef7e0;color:var(--warn)}
+.av{width:42px;height:42px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
+.t{flex:1;min-width:0}
+.n{font-weight:700;font-size:15px}
+.s{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;border:1px solid #000;color:#000;background:#fff}
+.pill.new{background:#000;color:#fff}
+.pill.lost,.pill.broker{border-color:#bbb;color:#888}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:0;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:var(--pri);color:#fff;flex:1;text-align:center;text-decoration:none}
-.btn.g{background:#25d366}.btn.l{background:#eef1f6;color:var(--ink)}
-.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.btn{border:1px solid #000;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:#000;color:#fff;flex:1;text-align:center;text-decoration:none;font-family:inherit}
+.btn.l{background:#fff;color:#000;border-color:var(--line)}
+.btn.o{background:#fff;color:#000;border-color:#000}
+.btn.sm{padding:6px 10px;font-size:13px;flex:0 0 auto}
+.btn:disabled{opacity:.5}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
 .kv:last-child{border:0}.kv b{color:var(--mut);font-weight:500}
 .st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px}
-.st button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px}
+.st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px;color:#000;font-family:inherit}
+.st button.on{background:#000;color:#fff;border-color:#000}
+input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px;color:#000}
 textarea{min-height:70px}
 label{font-size:13px;color:var(--mut)}
-.note{border-right:3px solid var(--pri);padding:6px 10px;margin:8px 0;background:#f7f9fc;border-radius:6px;font-size:14px}
+.note{border-inline-start:3px solid #000;padding:6px 10px;margin:8px 0;background:var(--soft);border-radius:6px;font-size:14px}
 .note small{display:block;color:var(--mut);font-size:11.5px}
 .empty{text-align:center;color:var(--mut);padding:40px 10px}
-.banner{background:#fff4e5;border:1px solid #f9d9a6;color:#7a4b00;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
-.banner.ok{background:#e6f4ea;border-color:#b7dfc1;color:#0d5a26}
-.badge{background:var(--bad);color:#fff;border-radius:10px;padding:0 7px;font-size:12px;margin-right:4px}
+.banner{background:#fff;border:1px solid #000;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
+.banner.dark{background:#000;color:#fff}
+.banner.dark .btn{background:#fff;color:#000;border-color:#fff}
+.banner.dark .btn.l{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
 .hidden{display:none!important}
-.center{max-width:380px;margin:30px auto}
-.err{color:var(--bad);font-size:14px;min-height:20px}
-a.link{color:var(--pri);font-size:14px}
+.center{max-width:400px;margin:30px auto}
+.err{color:#000;font-weight:600;font-size:14px;min-height:20px}
+.seg{display:flex;border:1px solid #000;border-radius:10px;overflow:hidden}
+.seg button{flex:1;border:0;background:#fff;color:#000;padding:10px;font-size:14px;font-family:inherit}
+.seg button.on{background:#000;color:#fff}
+.big-logo{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:40px;direction:ltr;text-align:center;margin:6px 0 2px}
+ol{padding-inline-start:20px;line-height:2}
 </style>
 </head>
 <body>
 <header>
-  <button id="backBtn" class="hidden">→</button>
-  <h1 id="title">عملاء دبي</h1>
-  <button id="refreshBtn" class="hidden">تحديث</button>
-  <button id="menuBtn" class="hidden">⚙︎</button>
+  <button id="backBtn" class="hidden"></button>
+  <h1 id="title"><span class="logo">Y CRM</span></h1>
+  <button id="refreshBtn" class="hidden"></button>
+  <button id="menuBtn" class="hidden"></button>
 </header>
 <main id="view"></main>
 
@@ -69,25 +83,101 @@ const KEY = "sb_publishable_62MmrfPqBg-no79xn0HvFA_b7VhlQa4";
 const VAPID = "BMV0dCIvzyCS5vrptD9BBaB0mnw-sVXuMc3uxeiVAOqqlF8xhEvBBDPkOVNvK2maoK-kG6CvZaljqZh0bGVUSkQ";
 const sb = createClient(URL_, KEY, { auth: { persistSession: true, autoRefreshToken: true } });
 
-const STATUS = { new:"جديد", contacted:"اتكلمنا", no_answer:"مردش", interested:"مهتم", viewing:"معاينة", won:"اتباع ✓", lost:"مش مهتم", broker:"وسيط" };
-const ANSWER_LABELS = {}; // filled automatically from question keys
+// ---------------- language ----------------
+const T = {
+ ar: {
+  back:"رجوع", refresh:"تحديث", settings:"الإعدادات",
+  welcome:"تسجيل الدخول", welcomeSub:"أدخل كود الدعوة وكلمة المرور اللذين وصلاك من المسؤول.",
+  code:"كود الدعوة", password:"كلمة المرور", login:"دخول", oneTime:"يُستخدم الكود مرة واحدة فقط وعلى جهاز واحد.",
+  iosTitle:"خطوة واحدة قبل الدخول", iosBody:"على هاتف آيفون يجب إضافة التطبيق إلى الشاشة الرئيسية أولًا، ثم إدخال الكود من داخل التطبيق.",
+  ios1:"اضغط زر المشاركة أسفل متصفح Safari.", ios2:"اختر «إضافة إلى الشاشة الرئيسية» (Add to Home Screen).", ios3:"افتح Y CRM من الشاشة الرئيسية وأدخل الكود هناك.",
+  iosWarn:"لا تُدخل الكود في Safari، لأنه يُستخدم مرة واحدة فقط.",
+  lockTitle:"افتح التطبيق بالبصمة", unlock:"فتح", tryAgain:"حاول مرة أخرى",
+  pushOffer:"فعّل الإشعارات ليصلك كل عميل جديد فور تسجيله.", pushEnable:"تفعيل الإشعارات",
+  pushIos:"لتصلك الإشعارات على آيفون: أضف التطبيق إلى الشاشة الرئيسية من زر المشاركة، ثم افتحه من هناك.",
+  pushUnsupported:"هذا المتصفح لا يدعم الإشعارات. افتح الرابط من Chrome على أندرويد أو Safari على آيفون.",
+  pushDenied:"الإشعارات مغلقة. فعّلها من إعدادات الهاتف لهذا التطبيق.",
+  pushNeedPerm:"يجب السماح بالإشعارات من إعدادات الهاتف.",
+  bioOffer:"هل تريد فتح التطبيق ببصمة الوجه أو الإصبع على هذا الجهاز؟", enable:"تفعيل", notNow:"ليس الآن", bioFail:"تعذّر التفعيل، جرّب من الإعدادات.",
+  tabs:{new:"جديد",all:"الكل",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسطاء",followup:"متابعة اليوم"},
+  status:{new:"جديد",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسيط"},
+  noLeads:"لا يوجد عملاء هنا بعد.", noName:"بدون اسم",
+  leadTitle:"تفاصيل العميل", call:"اتصال", whatsapp:"واتساب", stat:"الحالة",
+  brokerWarn:"اختار هذا العميل أنه وسيط عقاري.", email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
+  followup:"موعد المتابعة القادم", newNote:"ملاحظة جديدة", notePh:"مثال: الميزانية 700 ألف، يريد استوديو جاهزًا، المعاينة يوم الخميس.", save:"حفظ", notFound:"العميل غير موجود.",
+  name:"الاسم", role:"الصلاحية", admin:"مسؤول", agent:"موظف",
+  pushOnDevice:"الإشعارات على هذا الجهاز", on:"مفعّلة", off:"غير مفعّلة", testPush:"تجربة إشعار", noDevice:"لا يوجد جهاز مسجّل للإشعارات. فعّل الإشعارات أولًا.",
+  bio:"الدخول بالبصمة / Face ID", bioEnable:"تفعيل البصمة", bioDisable:"إلغاء البصمة", bioNA:"هذا الجهاز لا يدعم البصمة أو Face ID.",
+  lang:"اللغة", team:"الفريق والدعوات", csv:"تنزيل جميع العملاء (Excel / CSV)", logout:"تسجيل الخروج",
+  logoutNote:"بعد تسجيل الخروج ستحتاج إلى كود دعوة جديد من المسؤول للدخول مرة أخرى.", logoutConfirm:"هل أنت متأكد؟ ستحتاج إلى كود دعوة جديد للدخول مرة أخرى.",
+  loading:"جارٍ التحميل…", invite:"دعوة شخص جديد", personName:"اسم الشخص", personPh:"مثال: أحمد", makeAdmin:"مسؤول (يستطيع إنشاء الدعوات وإيقاف الأعضاء)",
+  makeCode:"إنشاء كود دعوة", members:"أعضاء الفريق", lastSeen:"آخر ظهور", you:"(أنت)", newCode:"كود جديد", stop:"إيقاف", activate:"تفعيل", stopped:"موقوف",
+  pending:"دعوات لم تُستخدم بعد", none:"لا يوجد", expires:"تنتهي", cancel:"إلغاء", copy:"نسخ الرسالة", copied:"تم النسخ", sendWa:"إرسال عبر واتساب",
+  shownOnce:"لن يظهر الكود وكلمة المرور مرة أخرى، أرسلهما الآن.", enterName:"اكتب الاسم أولًا.",
+  confirmReset:"إنشاء كود جديد لـ {n}؟ (في حال غيّر هاتفه أو سجّل الخروج)", confirmStop:"إيقاف هذا الشخص؟ لن يتمكن من فتح التطبيق.", confirmAct:"إعادة تفعيل هذا الشخص؟",
+  inviteMsg:"مرحبًا {n}،\nهذا رابط تطبيق Y CRM لمتابعة العملاء:\n{u}\n\nكود الدعوة: {c}\nكلمة المرور: {p}\n\nطريقة الدخول:\n- آيفون: افتح الرابط في Safari، ثم زر المشاركة، ثم «إضافة إلى الشاشة الرئيسية»، وافتح التطبيق من الشاشة الرئيسية وأدخل الكود.\n- أندرويد: افتح الرابط في Chrome، ثم القائمة، ثم «إضافة إلى الشاشة الرئيسية».\n\nالكود يُستخدم مرة واحدة فقط وينتهي بعد 48 ساعة.",
+  now:"الآن", minAgo:"منذ {x} دقيقة", hrAgo:"منذ {x} ساعة",
+  errors:{rate_limited:"محاولات كثيرة، انتظر 10 دقائق.",invalid:"الكود أو كلمة المرور غير صحيحين.",used:"هذا الكود استُخدم من قبل. اطلب كودًا جديدًا.",expired:"انتهت صلاحية الكود. اطلب كودًا جديدًا.",locked:"أُغلق الكود بسبب محاولات خاطئة. اطلب كودًا جديدًا.",name_required:"اكتب الاسم أولًا.",cannot_self:"لا يمكنك إيقاف نفسك.",unauthorized:"انتهت الجلسة، سجّل الدخول مرة أخرى.",admins_only:"هذه الخاصية للمسؤول فقط.",generic:"حدث خطأ، حاول مرة أخرى."}
+ },
+ en: {
+  back:"Back", refresh:"Refresh", settings:"Settings",
+  welcome:"Sign in", welcomeSub:"Enter the invite code and password you received from your admin.",
+  code:"Invite code", password:"Password", login:"Sign in", oneTime:"Each code works once, on one device only.",
+  iosTitle:"One step before signing in", iosBody:"On iPhone, add the app to your Home Screen first, then enter the code inside the app.",
+  ios1:"Tap the Share button at the bottom of Safari.", ios2:"Choose “Add to Home Screen”.", ios3:"Open Y CRM from your Home Screen and enter the code there.",
+  iosWarn:"Don't enter the code in Safari — it can only be used once.",
+  lockTitle:"Unlock with Face ID / fingerprint", unlock:"Unlock", tryAgain:"Try again",
+  pushOffer:"Turn on notifications to get every new lead the moment it arrives.", pushEnable:"Turn on notifications",
+  pushIos:"To get notifications on iPhone: add the app to your Home Screen from the Share button, then open it from there.",
+  pushUnsupported:"This browser doesn't support notifications. Open the link in Chrome (Android) or Safari (iPhone).",
+  pushDenied:"Notifications are blocked. Allow them for this app in your phone settings.",
+  pushNeedPerm:"Please allow notifications in your phone settings.",
+  bioOffer:"Unlock the app with Face ID / fingerprint on this device?", enable:"Enable", notNow:"Not now", bioFail:"Couldn't enable. Try again from Settings.",
+  tabs:{new:"New",all:"All",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Brokers",followup:"Follow up today"},
+  status:{new:"New",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Broker"},
+  noLeads:"No leads here yet.", noName:"No name",
+  leadTitle:"Lead details", call:"Call", whatsapp:"WhatsApp", stat:"Status",
+  brokerWarn:"This lead said they are a real-estate broker.", email:"Email", source:"Source", time:"Submitted",
+  followup:"Next follow-up", newNote:"New note", notePh:"e.g. Budget 700K, wants a ready studio, viewing on Thursday.", save:"Save", notFound:"Lead not found.",
+  name:"Name", role:"Role", admin:"Admin", agent:"Agent",
+  pushOnDevice:"Notifications on this device", on:"On", off:"Off", testPush:"Send test notification", noDevice:"No device registered. Turn on notifications first.",
+  bio:"Face ID / fingerprint unlock", bioEnable:"Enable", bioDisable:"Disable", bioNA:"This device has no Face ID or fingerprint set up.",
+  lang:"Language", team:"Team & invites", csv:"Download all leads (Excel / CSV)", logout:"Sign out",
+  logoutNote:"After signing out you'll need a new invite code from your admin.", logoutConfirm:"Are you sure? You'll need a new invite code to sign in again.",
+  loading:"Loading…", invite:"Invite someone", personName:"Name", personPh:"e.g. Ahmed", makeAdmin:"Admin (can create invites and deactivate members)",
+  makeCode:"Create invite code", members:"Team members", lastSeen:"Last seen", you:"(you)", newCode:"New code", stop:"Deactivate", activate:"Activate", stopped:"Deactivated",
+  pending:"Unused invites", none:"None", expires:"Expires", cancel:"Cancel", copy:"Copy message", copied:"Copied", sendWa:"Send via WhatsApp",
+  shownOnce:"The code and password won't be shown again — send them now.", enterName:"Enter a name first.",
+  confirmReset:"Create a new code for {n}? (if they changed phones or signed out)", confirmStop:"Deactivate this person? They won't be able to open the app.", confirmAct:"Reactivate this person?",
+  inviteMsg:"Hi {n},\nHere is the Y CRM app for following up on leads:\n{u}\n\nInvite code: {c}\nPassword: {p}\n\nHow to sign in:\n- iPhone: open the link in Safari, tap Share, then “Add to Home Screen”, open the app from your Home Screen and enter the code.\n- Android: open the link in Chrome, open the menu, then “Add to Home screen”.\n\nThe code works once only and expires in 48 hours.",
+  now:"just now", minAgo:"{x} min ago", hrAgo:"{x} h ago",
+  errors:{rate_limited:"Too many attempts. Wait 10 minutes.",invalid:"Wrong code or password.",used:"This code was already used. Ask for a new one.",expired:"This code has expired. Ask for a new one.",locked:"This code was locked after wrong attempts. Ask for a new one.",name_required:"Enter a name first.",cannot_self:"You can't deactivate yourself.",unauthorized:"Session expired. Please sign in again.",admins_only:"Admins only.",generic:"Something went wrong. Please try again."}
+ }
+};
+let LANG = (()=>{ try { return localStorage.getItem("lang") || ((navigator.language||"").startsWith("ar")?"ar":"en"); } catch { return "ar"; } })();
+const t = (k)=> T[LANG][k] ?? k;
+const fmt = (s,o)=> s.replace(/\{(\w)\}/g,(_,k)=>o[k]??"");
+function applyLang(){ document.documentElement.lang=LANG; document.documentElement.dir=LANG==="ar"?"rtl":"ltr";
+  document.getElementById("backBtn").textContent = t("back"); document.getElementById("refreshBtn").textContent = t("refresh"); document.getElementById("menuBtn").textContent = t("settings"); }
+applyLang();
+const errMsg = (e)=> T[LANG].errors[e?.message] || T[LANG].errors.generic;
+
+// ---------------- helpers ----------------
 const $ = (h) => { const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstElementChild; };
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const view = document.getElementById("view");
 let me = null, leads = [], filter = "new", channel = null;
-
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
-
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
-
-function ago(t){ if(!t) return ""; const m=Math.round((Date.now()-new Date(t))/60000);
-  if(m<1) return "دلوقتي"; if(m<60) return `من ${m} دقيقة`; const h=Math.round(m/60); if(h<24) return `من ${h} ساعة`; return new Date(t).toLocaleDateString("ar-EG",{day:"numeric",month:"short"}); }
-const label = (k) => k.replace(/_/g," ").replace(/\?$/,"") + "؟";
+function ago(x){ if(!x) return ""; const m=Math.round((Date.now()-new Date(x))/60000);
+  if(m<1) return t("now"); if(m<60) return fmt(t("minAgo"),{x:m}); const h=Math.round(m/60); if(h<24) return fmt(t("hrAgo"),{x:h});
+  return new Date(x).toLocaleDateString(LANG==="ar"?"ar-EG":"en-GB",{day:"numeric",month:"short"}); }
+const label = (k) => k.replace(/_/g," ").replace(/[?؟]$/,"");
 const digits = (p) => String(p||"").replace(/[^\d]/g,"");
-
+const initial = (n)=> esc((String(n||"?").trim()[0]||"?").toUpperCase());
 function header(title, back=false){
-  document.getElementById("title").textContent = title;
+  document.getElementById("title").innerHTML = title ? esc(title) : `<span class="logo">Y CRM</span>`;
   document.getElementById("backBtn").classList.toggle("hidden", !back);
   document.getElementById("refreshBtn").classList.toggle("hidden", back || !me);
   document.getElementById("menuBtn").classList.toggle("hidden", back || !me);
@@ -96,52 +186,53 @@ document.getElementById("backBtn").onclick = () => { location.hash = ""; };
 document.getElementById("refreshBtn").onclick = () => loadLeads();
 document.getElementById("menuBtn").onclick = () => { location.hash = "settings"; };
 
-// ---------- auth: one-time invite (code + password) ----------
+// ---------------- server calls ----------------
 async function team(action, body={}){
   const { data:{ session } } = await sb.auth.getSession();
   const r = await fetch(`${URL_}/functions/v1/team?action=${action}`,{method:"POST",
     headers:{"Content-Type":"application/json",apikey:KEY,...(session?{Authorization:`Bearer ${session.access_token}`}:{})},body:JSON.stringify(body)});
-  const j = await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||"حصل خطأ"); return j;
-}
-function loginView(){
-  header("عملاء دبي");
-  view.innerHTML = "";
-  if (isIOS && !standalone) {
-    view.innerHTML = `<div class="center card"><h2 style="margin-top:0">📲 خطوة واحدة قبل الدخول</h2>
-      <p>على الآيفون لازم تضيف التطبيق للشاشة الرئيسية <b>الأول</b>، وبعدين تدخل الكود من جوه التطبيق.</p>
-      <ol style="line-height:2"><li>دوس زرار <b>المشاركة</b> ⬆️ تحت في Safari</li><li>اختار <b>Add to Home Screen</b> (إضافة إلى الشاشة الرئيسية)</li><li>افتح <b>عملاء دبي</b> من الشاشة الرئيسية ودخّل الكود هناك</li></ol>
-      <p style="color:var(--mut);font-size:13px">متدخلش الكود هنا في Safari، لأن الكود بيشتغل مرة واحدة بس.</p></div>`;
-    return;
-  }
-  const v = $(`<div class="center card">
-    <h2 style="margin-top:0">أهلاً 👋</h2>
-    <p style="color:var(--mut);font-size:14px;margin-top:0">اكتب كود الدعوة والباسورد اللي وصلوك.</p>
-    <label>كود الدعوة</label><input id="code" dir="ltr" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX">
-    <label>الباسورد</label><input id="pw" type="password" inputmode="numeric" dir="ltr" autocomplete="one-time-code">
-    <div class="err" id="err"></div>
-    <button class="btn" id="go" style="width:100%">دخول</button>
-    <p style="color:var(--mut);font-size:12.5px;text-align:center">الكود بيشتغل مرة واحدة بس وعلى موبايل واحد.</p>
-  </div>`);
-  view.append(v);
-  v.querySelector("#go").onclick = async () => {
-    const err = v.querySelector("#err"); err.textContent = ""; const b=v.querySelector("#go"); b.disabled=true;
-    try {
-      const s = await team("redeem",{ code:v.querySelector("#code").value, password:v.querySelector("#pw").value });
-      await sb.auth.setSession(s);
-      sessionStorage.setItem("unlocked","1");
-      await start(true);
-    } catch(e){ err.textContent = e.message; } finally { b.disabled=false; }
-  };
+  const j = await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||"generic"); return j;
 }
 
-// ---------- Face ID / fingerprint lock (WebAuthn, on this device) ----------
+// ---------------- sign in ----------------
+function loginView(){
+  header("");
+  if (isIOS && !standalone) {
+    view.innerHTML = `<div class="center card"><div class="big-logo">Y CRM</div>
+      <h2>${t("iosTitle")}</h2><p>${t("iosBody")}</p>
+      <ol><li>${t("ios1")}</li><li>${t("ios2")}</li><li>${t("ios3")}</li></ol>
+      <p style="color:var(--mut);font-size:13px">${t("iosWarn")}</p>${langSwitch()}</div>`;
+    bindLang(); return;
+  }
+  view.innerHTML = `<div class="center card"><div class="big-logo">Y CRM</div>
+    <h2 style="margin-bottom:4px">${t("welcome")}</h2>
+    <p style="color:var(--mut);font-size:14px;margin-top:0">${t("welcomeSub")}</p>
+    <label>${t("code")}</label><input id="code" dir="ltr" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX">
+    <label>${t("password")}</label><input id="pw" type="password" inputmode="numeric" dir="ltr" autocomplete="one-time-code">
+    <div class="err" id="err"></div>
+    <button class="btn" id="go" style="width:100%">${t("login")}</button>
+    <p style="color:var(--mut);font-size:12.5px;text-align:center">${t("oneTime")}</p>${langSwitch()}</div>`;
+  bindLang();
+  const b = view.querySelector("#go");
+  b.onclick = async () => {
+    const err = view.querySelector("#err"); err.textContent = ""; b.disabled=true;
+    try {
+      const s = await team("redeem",{ code:view.querySelector("#code").value, password:view.querySelector("#pw").value });
+      await sb.auth.setSession(s); sessionStorage.setItem("unlocked","1"); await start(true);
+    } catch(e){ err.textContent = errMsg(e); } finally { b.disabled=false; }
+  };
+}
+function langSwitch(){ return `<div style="margin-top:14px"><label>${t("lang")}</label><div class="seg" style="margin-top:6px"><button data-lang="ar" class="${LANG==="ar"?"on":""}">العربية</button><button data-lang="en" class="${LANG==="en"?"on":""}">English</button></div></div>`; }
+function bindLang(){ view.querySelectorAll("[data-lang]").forEach(b=>b.onclick=async()=>{ LANG=b.dataset.lang; try{localStorage.setItem("lang",LANG);}catch{} applyLang(); await syncPushLang(); me?route():loginView(); }); }
+
+// ---------------- biometric lock (WebAuthn on this device) ----------------
 const BIO_KEY="bio_cred_id";
 const bioOn = () => { try { return !!localStorage.getItem(BIO_KEY); } catch { return false; } };
 const rnd = (n)=>crypto.getRandomValues(new Uint8Array(n));
 const b64u = (buf)=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 async function bioAvailable(){ try { return !!(window.PublicKeyCredential && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()); } catch { return false; } }
 async function enableBio(){
-  const cred = await navigator.credentials.create({ publicKey:{ challenge:rnd(32), rp:{ name:"عملاء دبي" },
+  const cred = await navigator.credentials.create({ publicKey:{ challenge:rnd(32), rp:{ name:"Y CRM" },
     user:{ id:rnd(16), name:me.display_name, displayName:me.display_name },
     pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
     authenticatorSelection:{ authenticatorAttachment:"platform", userVerification:"required", residentKey:"preferred" }, timeout:60000 }});
@@ -153,15 +244,20 @@ async function bioUnlock(){
   await navigator.credentials.get({ publicKey:{ challenge:rnd(32), allowCredentials:[{type:"public-key",id:raw}], userVerification:"required", timeout:60000 }});
 }
 function lockView(){
-  header("عملاء دبي");
-  view.innerHTML = `<div class="center card" style="text-align:center"><div style="font-size:54px">🔒</div>
-    <h2>افتح ببصمتك</h2><div class="err" id="err"></div><button class="btn" id="un" style="width:100%">فتح</button></div>`;
-  const go = async()=>{ try{ await bioUnlock(); sessionStorage.setItem("unlocked","1"); start(true);}catch(e){ view.querySelector("#err").textContent="جرّب تاني"; } };
+  header("");
+  view.innerHTML = `<div class="center card" style="text-align:center"><div class="big-logo">Y CRM</div>
+    <h2>${t("lockTitle")}</h2><div class="err" id="err"></div><button class="btn" id="un" style="width:100%">${t("unlock")}</button></div>`;
+  const go = async()=>{ try{ await bioUnlock(); sessionStorage.setItem("unlocked","1"); start(true);}catch(e){ view.querySelector("#err").textContent=t("tryAgain"); } };
   view.querySelector("#un").onclick = go; go();
 }
 let hiddenAt = 0;
-document.addEventListener("visibilitychange", ()=>{ if(document.hidden) hiddenAt=Date.now(); else if(bioOn() && me && Date.now()-hiddenAt>5*60*1000){ sessionStorage.removeItem("unlocked"); lockView(); } });
+document.addEventListener("visibilitychange", ()=>{
+  if(document.hidden){ hiddenAt=Date.now(); return; }
+  if(bioOn() && me && Date.now()-hiddenAt>5*60*1000){ sessionStorage.removeItem("unlocked"); return lockView(); }
+  if(me) loadLeads();
+});
 
+// ---------------- session ----------------
 async function start(fresh=false){
   const { data:{ session } } = await sb.auth.getSession();
   if (!session) return loginView();
@@ -175,15 +271,13 @@ async function start(fresh=false){
   channel = sb.channel("leads").on("postgres_changes",{event:"*",schema:"public",table:"leads"},()=>loadLeads()).subscribe();
 }
 window.addEventListener("hashchange", route);
-document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && me) loadLeads(); });
-
 async function loadLeads(){
   const { data, error } = await sb.from("leads").select("*").order("created_at",{ascending:false}).limit(500);
   if (!error) leads = data;
   route();
 }
 
-// ---------- push ----------
+// ---------------- push ----------------
 function b64ToU8(b){ const p="=".repeat((4-b.length%4)%4); const s=atob((b+p).replace(/-/g,"+").replace(/_/g,"/")); return Uint8Array.from([...s].map(c=>c.charCodeAt(0))); }
 async function pushState(){
   if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) return "unsupported";
@@ -193,21 +287,25 @@ async function pushState(){
 }
 async function enablePush(){
   const perm = await Notification.requestPermission();
-  if (perm !== "granted") return alert("لازم توافق على الإشعارات من إعدادات الموبايل");
+  if (perm !== "granted") return alert(t("pushNeedPerm"));
   const reg = await navigator.serviceWorker.ready;
   let sub = await reg.pushManager.getSubscription();
   if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey:b64ToU8(VAPID) });
   const j = sub.toJSON();
-  await sb.from("push_subscriptions").upsert({ user_id:me.user_id, endpoint:j.endpoint, p256dh:j.keys.p256dh, auth:j.keys.auth, user_agent:navigator.userAgent },{ onConflict:"endpoint" });
+  await sb.from("push_subscriptions").upsert({ user_id:me.user_id, endpoint:j.endpoint, p256dh:j.keys.p256dh, auth:j.keys.auth, user_agent:navigator.userAgent, lang:LANG },{ onConflict:"endpoint" });
   route();
+}
+async function syncPushLang(){
+  try { if(!me || !("serviceWorker" in navigator)) return; const reg = await navigator.serviceWorker.ready; const sub = await reg.pushManager.getSubscription();
+    if (sub) await sb.from("push_subscriptions").update({ lang:LANG }).eq("endpoint", sub.endpoint); } catch {}
 }
 async function testPush(){
   const { data:{ session } } = await sb.auth.getSession();
   const r = await fetch(`${URL_}/functions/v1/leads?action=test-push`,{method:"POST",headers:{Authorization:`Bearer ${session.access_token}`,apikey:KEY}});
-  const j = await r.json(); if(!j.sent) alert("مفيش جهاز متسجل للإشعارات. فعّل الإشعارات الأول.");
+  const j = await r.json(); if(!j.sent) alert(t("noDevice"));
 }
 
-// ---------- views ----------
+// ---------------- views ----------------
 async function route(){
   if (!me) return;
   if (bioOn() && !sessionStorage.getItem("unlocked")) return lockView();
@@ -217,132 +315,129 @@ async function route(){
   if (h === "settings") return settingsView();
   listView();
 }
-
-async function pushBanner(){
-  const bio = (sessionStorage.getItem("offerBio") && !bioOn())
-    ? `<div class="banner ok" id="bioBox">🔐 تفعّل فتح التطبيق ببصمة الوش / الصباع على الموبايل ده؟
-        <div class="btns" style="margin-top:8px"><button class="btn" id="bioYes">تفعيل</button><button class="btn l" id="bioNo">مش دلوقتي</button></div></div>` : "";
+async function banners(){
+  let out = "";
+  if (sessionStorage.getItem("offerBio") && !bioOn())
+    out += `<div class="banner dark">${t("bioOffer")}<div class="btns" style="margin-top:10px"><button class="btn" id="bioYes">${t("enable")}</button><button class="btn l" id="bioNo">${t("notNow")}</button></div></div>`;
   const st = await pushState();
-  if (st==="on") return bio;
-  return bio + (await pushBannerInner(st));
+  if (st==="on") return out;
+  if (isIOS && !standalone) return out + `<div class="banner">${t("pushIos")}</div>`;
+  if (st==="unsupported") return out + `<div class="banner">${t("pushUnsupported")}</div>`;
+  if (st==="denied") return out + `<div class="banner">${t("pushDenied")}</div>`;
+  return out + `<div class="banner">${t("pushOffer")}<button class="btn" id="pushOn" style="margin-top:10px;width:100%">${t("pushEnable")}</button></div>`;
 }
-async function pushBannerInner(st){
-  if (isIOS && !standalone) return `<div class="banner">📲 علشان الإشعارات توصلك على الآيفون: دوس زرار <b>المشاركة</b> تحت ⬆️ وبعدين <b>Add to Home Screen</b>، وافتح التطبيق من الشاشة الرئيسية.</div>`;
-  if (st==="unsupported") return `<div class="banner">المتصفح ده مش بيدعم الإشعارات. افتح اللينك من Chrome (أندرويد) أو Safari (آيفون).</div>`;
-  if (st==="denied") return `<div class="banner">الإشعارات مقفولة. افتحها من إعدادات الموبايل للتطبيق ده.</div>`;
-  return `<div class="banner">🔔 فعّل الإشعارات علشان يوصلك كل عميل جديد في نفس اللحظة <button class="btn" id="pushOn" style="margin-top:8px;width:100%">تفعيل الإشعارات</button></div>`;
-}
-
 async function listView(){
-  header("عملاء دبي");
-  const counts = Object.fromEntries(Object.keys(STATUS).map(k=>[k,leads.filter(l=>l.status===k).length]));
-  const tabs = [["new","جديد"],["all","الكل"],["contacted","اتكلمنا"],["no_answer","مردش"],["interested","مهتم"],["viewing","معاينة"],["won","اتباع"],["lost","مش مهتم"],["broker","وسطاء"],["followup","متابعة النهارده"]];
+  header("");
+  const tb = T[LANG].tabs;
+  const counts = Object.fromEntries(Object.keys(T.ar.status).map(k=>[k,leads.filter(l=>l.status===k).length]));
   const today = new Date(); today.setHours(23,59,59);
-  const list = leads.filter(l => filter==="all" ? true : filter==="followup" ? (l.next_follow_up && new Date(l.next_follow_up)<=today && !["won","lost","broker"].includes(l.status)) : l.status===filter);
-  view.innerHTML = (await pushBanner()) + `<div class="tabs">${tabs.map(([k,t])=>`<button data-f="${k}" class="${filter===k?"on":""}">${t}${counts[k]&&k==="new"?`<span class="badge">${counts[k]}</span>`:""}</button>`).join("")}</div>`
+  const due = (l)=> l.next_follow_up && new Date(l.next_follow_up)<=today && !["won","lost","broker"].includes(l.status);
+  counts.followup = leads.filter(due).length;
+  const list = leads.filter(l => filter==="all" ? true : filter==="followup" ? due(l) : l.status===filter);
+  const keys = ["new","all","contacted","no_answer","interested","viewing","won","lost","broker","followup"];
+  view.innerHTML = (await banners()) + `<div class="tabs">${keys.map(k=>`<button data-f="${k}" class="${filter===k?"on":""}">${tb[k]}${(k==="new"||k==="followup")&&counts[k]?`<span class="count">${counts[k]}</span>`:""}</button>`).join("")}</div>`
     + (list.length ? list.map(l=>{
-      const a = l.answers||{}; const sub = Object.values(a).slice(0,2).join(" · ");
-      return `<div class="card lead" data-id="${l.id}"><div class="av">${esc((l.full_name||"؟").trim()[0]||"؟")}</div>
-        <div class="t"><div class="n">${esc(l.full_name||"بدون اسم")}</div><div class="s">${esc(sub||l.phone)}</div></div>
-        <div style="text-align:left"><span class="pill ${l.status}">${STATUS[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
-    }).join("") : `<div class="empty">مفيش عملاء هنا لسه</div>`);
+      const sub = Object.values(l.answers||{}).slice(0,2).join(" · ");
+      return `<div class="card lead" data-id="${l.id}"><div class="av">${initial(l.full_name)}</div>
+        <div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s">${esc(sub||l.phone)}</div></div>
+        <div style="text-align:end"><span class="pill ${l.status}">${T[LANG].status[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
+    }).join("") : `<div class="empty">${t("noLeads")}</div>`);
   view.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f; listView();});
   view.querySelectorAll(".lead").forEach(c=>c.onclick=()=>{location.hash="lead/"+c.dataset.id;});
   const p = view.querySelector("#pushOn"); if(p) p.onclick = enablePush;
-  const by = view.querySelector("#bioYes"); if(by) by.onclick = async()=>{ try{ await enableBio(); sessionStorage.removeItem("offerBio"); listView(); }catch(e){ by.textContent="مقدرناش، جرّب من الإعدادات"; } };
+  const by = view.querySelector("#bioYes"); if(by) by.onclick = async()=>{ try{ await enableBio(); sessionStorage.removeItem("offerBio"); listView(); }catch{ by.textContent=t("bioFail"); } };
   const bn = view.querySelector("#bioNo"); if(bn) bn.onclick = ()=>{ sessionStorage.removeItem("offerBio"); listView(); };
 }
-
 async function leadView(id){
-  header("تفاصيل العميل", true);
+  header(t("leadTitle"), true);
   let l = leads.find(x=>x.id===id);
   if (!l){ const { data } = await sb.from("leads").select("*").eq("id",id).maybeSingle(); l=data; }
-  if (!l){ view.innerHTML = `<div class="empty">العميل مش موجود</div>`; return; }
+  if (!l){ view.innerHTML = `<div class="empty">${t("notFound")}</div>`; return; }
   const { data: notes } = await sb.from("lead_notes").select("*, members(display_name)").eq("lead_id",id).order("created_at",{ascending:false});
   const ph = digits(l.phone);
   const fu = l.next_follow_up ? new Date(l.next_follow_up) : null;
   const fuVal = fu ? new Date(fu.getTime()-fu.getTimezoneOffset()*60000).toISOString().slice(0,16) : "";
   view.innerHTML = `
-  ${l.is_broker?`<div class="banner">⚠️ العميل ده اختار إنه <b>وسيط عقاري</b></div>`:""}
-  <div class="card"><div class="lead"><div class="av">${esc((l.full_name||"؟")[0])}</div><div class="t"><div class="n">${esc(l.full_name||"بدون اسم")}</div><div class="s" dir="ltr" style="text-align:right">${esc(l.phone)}</div></div></div>
-    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">📞 اتصال</a><a class="btn g" href="https://wa.me/${ph}" target="_blank">واتساب</a></div></div>
-  <div class="card"><label>الحالة</label><div class="st" style="margin-top:6px">${Object.entries(STATUS).map(([k,t])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${t}</button>`).join("")}</div></div>
+  ${l.is_broker?`<div class="banner dark">${t("brokerWarn")}</div>`:""}
+  <div class="card"><div class="lead"><div class="av">${initial(l.full_name)}</div><div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s" dir="ltr" style="text-align:start">${esc(l.phone)}</div></div></div>
+    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">${t("call")}</a><a class="btn o" href="https://wa.me/${ph}" target="_blank">${t("whatsapp")}</a></div></div>
+  <div class="card"><label>${t("stat")}</label><div class="st" style="margin-top:6px">${Object.entries(T[LANG].status).map(([k,v])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${v}</button>`).join("")}</div></div>
   <div class="card">${Object.entries(l.answers||{}).map(([k,v])=>`<div class="kv"><b>${esc(label(k))}</b><span>${esc(v)}</span></div>`).join("")}
-    ${l.email?`<div class="kv"><b>الإيميل</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
-    <div class="kv"><b>جه من</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
-    <div class="kv"><b>وقت التسجيل</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString("ar-EG")}</span></div></div>
-  <div class="card"><label>ميعاد المتابعة الجاية</label><input type="datetime-local" id="fu" value="${fuVal}">
-    <label>ملاحظة جديدة</label><textarea id="nt" placeholder="مثلاً: ميزانيته 700 ألف، عاوز استوديو جاهز، هيعاين الخميس"></textarea>
-    <button class="btn" id="save" style="width:100%">حفظ</button>
+    ${l.email?`<div class="kv"><b>${t("email")}</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
+    <div class="kv"><b>${t("source")}</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
+    <div class="kv"><b>${t("time")}</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</span></div></div>
+  <div class="card"><label>${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
+    <label>${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
+    <button class="btn" id="save" style="width:100%">${t("save")}</button>
     ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
-  view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); l.status=b.dataset.s; await loadLeads(); });
+  view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); await loadLeads(); });
   view.querySelector("#save").onclick = async () => {
     const body = view.querySelector("#nt").value.trim(); const f = view.querySelector("#fu").value;
     await sb.from("leads").update({ next_follow_up: f ? new Date(f).toISOString() : null }).eq("id",id);
     if (body) await sb.from("lead_notes").insert({ lead_id:id, body, author:me.user_id });
     await loadLeads();
   };
-  if (l.status==="new"){ /* opening a new lead doesn't change status automatically */ }
 }
-
 async function settingsView(){
-  header("الإعدادات", true);
+  header(t("settings"), true);
   const st = await pushState();
-  view.innerHTML = `<div class="card"><div class="kv"><b>الاسم</b><span>${esc(me.display_name)}</span></div><div class="kv"><b>الصلاحية</b><span>${me.role==="admin"?"أدمن":"موظف"}</span></div></div>
-  <div class="card"><div class="kv"><b>الإشعارات على الجهاز ده</b><span>${st==="on"?"✅ شغالة":"❌ مش شغالة"}</span></div>
-    <div class="btns" style="margin-top:10px">${st==="on"?`<button class="btn l" id="tp">جرّب إشعار</button>`:`<button class="btn" id="en">تفعيل الإشعارات</button>`}</div></div>
-  <div class="card"><div class="kv"><b>الدخول بالبصمة / Face ID</b><span>${bioOn()?"✅ متفعّل":"❌ مش متفعّل"}</span></div>
-    ${bioOn()?`<button class="btn l" id="bioOff" style="width:100%;margin-top:8px">إلغاء البصمة</button>`:`<button class="btn" id="bioOn" style="width:100%;margin-top:8px">تفعيل البصمة</button>`}</div>
-  ${me.role==="admin"?`<div class="card"><button class="btn" id="teamBtn" style="width:100%">👥 الفريق والدعوات</button></div>`:""}
-  <div class="card"><button class="btn l" id="csv" style="width:100%">تنزيل كل العملاء (Excel/CSV)</button></div>
-  <div class="card"><button class="btn l" id="out" style="width:100%;color:var(--bad)">تسجيل خروج</button>
-    <p style="color:var(--mut);font-size:12.5px;margin-bottom:0">لو خرجت، هتحتاج كود دعوة جديد من الأدمن علشان تدخل تاني.</p></div>`;
+  view.innerHTML = `<div class="card"><div class="kv"><b>${t("name")}</b><span>${esc(me.display_name)}</span></div><div class="kv"><b>${t("role")}</b><span>${me.role==="admin"?t("admin"):t("agent")}</span></div></div>
+  <div class="card">${langSwitch().replace('style="margin-top:14px"','')}</div>
+  <div class="card"><div class="kv"><b>${t("pushOnDevice")}</b><span>${st==="on"?t("on"):t("off")}</span></div>
+    <div class="btns" style="margin-top:10px">${st==="on"?`<button class="btn l" id="tp">${t("testPush")}</button>`:`<button class="btn" id="en">${t("pushEnable")}</button>`}</div></div>
+  <div class="card"><div class="kv"><b>${t("bio")}</b><span>${bioOn()?t("on"):t("off")}</span></div>
+    ${bioOn()?`<button class="btn l" id="bioOff" style="width:100%;margin-top:8px">${t("bioDisable")}</button>`:`<button class="btn" id="bioOn" style="width:100%;margin-top:8px">${t("bioEnable")}</button>`}</div>
+  ${me.role==="admin"?`<div class="card"><button class="btn" id="teamBtn" style="width:100%">${t("team")}</button></div>`:""}
+  <div class="card"><button class="btn l" id="csv" style="width:100%">${t("csv")}</button></div>
+  <div class="card"><button class="btn o" id="out" style="width:100%">${t("logout")}</button>
+    <p style="color:var(--mut);font-size:12.5px;margin-bottom:0">${t("logoutNote")}</p></div>`;
+  bindLang();
   const tp=view.querySelector("#tp"); if(tp) tp.onclick=testPush;
-  const bo=view.querySelector("#bioOn"); if(bo) bo.onclick=async()=>{ if(!await bioAvailable()) return alert("الموبايل ده مفيهوش بصمة أو Face ID متفعّل"); try{ await enableBio(); settingsView(); }catch(e){ alert(e.message);} };
+  const en=view.querySelector("#en"); if(en) en.onclick=enablePush;
+  const bo=view.querySelector("#bioOn"); if(bo) bo.onclick=async()=>{ if(!await bioAvailable()) return alert(t("bioNA")); try{ await enableBio(); settingsView(); }catch(e){ alert(t("bioFail")); } };
   const bf=view.querySelector("#bioOff"); if(bf) bf.onclick=()=>{ localStorage.removeItem(BIO_KEY); settingsView(); };
   const tb=view.querySelector("#teamBtn"); if(tb) tb.onclick=()=>{ location.hash="team"; };
-  const en=view.querySelector("#en"); if(en) en.onclick=enablePush;
-  view.querySelector("#out").onclick = async()=>{ if(!confirm("متأكد؟ هتحتاج كود دعوة جديد علشان تدخل تاني.")) return; await sb.auth.signOut(); localStorage.removeItem(BIO_KEY); me=null; location.hash=""; loginView(); };
+  view.querySelector("#out").onclick = async()=>{ if(!confirm(t("logoutConfirm"))) return; await sb.auth.signOut(); localStorage.removeItem(BIO_KEY); me=null; location.hash=""; loginView(); };
   view.querySelector("#csv").onclick = () => {
     const keys = [...new Set(leads.flatMap(l=>Object.keys(l.answers||{})))];
-    const rows = [["الاسم","التليفون","الإيميل","الحالة",...keys,"الإعلان","التاريخ"], ...leads.map(l=>[l.full_name,l.phone,l.email,STATUS[l.status],...keys.map(k=>(l.answers||{})[k]||""),l.ad_name||"",new Date(l.created_at).toLocaleString("en-GB")])];
+    const S = T[LANG].status;
+    const head = LANG==="ar" ? ["الاسم","الهاتف","البريد الإلكتروني","الحالة",...keys,"الإعلان","التاريخ"] : ["Name","Phone","Email","Status",...keys,"Ad","Date"];
+    const rows = [head, ...leads.map(l=>[l.full_name,l.phone,l.email,S[l.status],...keys.map(k=>(l.answers||{})[k]||""),l.ad_name||"",new Date(l.created_at).toLocaleString("en-GB")])];
     const csv = "﻿"+rows.map(r=>r.map(c=>`"${String(c??"").replace(/"/g,'""')}"`).join(",")).join("\n");
-    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download="leads.csv"; a.click();
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download="Y-CRM-leads.csv"; a.click();
   };
 }
-
 async function teamView(){
-  header("الفريق والدعوات", true);
-  view.innerHTML = `<div class="empty">جاري التحميل…</div>`;
-  let d; try { d = await team("list"); } catch(e){ view.innerHTML = `<div class="empty">${esc(e.message)}</div>`; return; }
+  header(t("team"), true);
+  view.innerHTML = `<div class="empty">${t("loading")}</div>`;
+  let d; try { d = await team("list"); } catch(e){ view.innerHTML = `<div class="empty">${esc(errMsg(e))}</div>`; return; }
   view.innerHTML = `
-  <div class="card"><h3 style="margin-top:0">دعوة شخص جديد</h3>
-    <label>الاسم</label><input id="nm" placeholder="مثلاً: أحمد">
-    <label><input type="checkbox" id="adm" style="width:auto;margin:0 0 0 6px">أدمن (يقدر يعمل دعوات ويوقف ناس)</label>
-    <button class="btn" id="mk" style="width:100%;margin-top:10px">اعمل كود دعوة</button>
+  <div class="card"><h3 style="margin-top:0">${t("invite")}</h3>
+    <label>${t("personName")}</label><input id="nm" placeholder="${t("personPh")}">
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="adm" style="width:auto;margin:0">${t("makeAdmin")}</label>
+    <button class="btn" id="mk" style="width:100%;margin-top:10px">${t("makeCode")}</button>
     <div id="out"></div></div>
-  <div class="card"><h3 style="margin-top:0">الفريق</h3>
-    ${(d.members||[]).map(m=>`<div class="kv"><span>${esc(m.display_name)} ${m.role==="admin"?'<span class="pill">أدمن</span>':""} ${m.active?"":'<span class="pill lost">موقوف</span>'}<br><small style="color:var(--mut)">${m.last_seen?"آخر ظهور "+ago(m.last_seen):""}</small></span>
-      <span>${m.user_id===me.user_id?"(إنت)":`<button class="btn l" style="padding:6px 10px;font-size:13px" data-reset="${m.user_id}" data-name="${esc(m.display_name)}">كود جديد</button>
-      <button class="btn l" style="padding:6px 10px;font-size:13px;color:${m.active?"var(--bad)":"var(--ok)"}" data-tg="${m.user_id}" data-on="${m.active?0:1}">${m.active?"إيقاف":"تفعيل"}</button>`}</span></div>`).join("")}</div>
-  <div class="card"><h3 style="margin-top:0">دعوات لسه متستخدمتش</h3>
-    ${(d.invites||[]).length?(d.invites).map(i=>`<div class="kv"><span>${esc(i.display_name)}<br><small style="color:var(--mut)">بتنتهي ${new Date(i.expires_at).toLocaleString("ar-EG")}</small></span><button class="btn l" style="padding:6px 10px;font-size:13px;color:var(--bad)" data-cancel="${i.id}">إلغاء</button></div>`).join(""):'<div style="color:var(--mut)">مفيش</div>'}</div>`;
+  <div class="card"><h3 style="margin-top:0">${t("members")}</h3>
+    ${(d.members||[]).map(m=>`<div class="kv"><span>${esc(m.display_name)} ${m.role==="admin"?`<span class="pill">${t("admin")}</span>`:""} ${m.active?"":`<span class="pill lost">${t("stopped")}</span>`}<br><small style="color:var(--mut)">${m.last_seen?t("lastSeen")+" "+ago(m.last_seen):""}</small></span>
+      <span>${m.user_id===me.user_id?t("you"):`<button class="btn l sm" data-reset="${m.user_id}" data-name="${esc(m.display_name)}">${t("newCode")}</button>
+      <button class="btn o sm" data-tg="${m.user_id}" data-on="${m.active?0:1}">${m.active?t("stop"):t("activate")}</button>`}</span></div>`).join("")}</div>
+  <div class="card"><h3 style="margin-top:0">${t("pending")}</h3>
+    ${(d.invites||[]).length?(d.invites).map(i=>`<div class="kv"><span>${esc(i.display_name)}<br><small style="color:var(--mut)">${t("expires")} ${new Date(i.expires_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</small></span><button class="btn o sm" data-cancel="${i.id}">${t("cancel")}</button></div>`).join(""):`<div style="color:var(--mut)">${t("none")}</div>`}</div>`;
   const show = (r, name) => {
-    const msg = `أهلاً ${name} 👋\nده تطبيق عملاء دبي:\n${location.origin+location.pathname}\n\nكود الدعوة: ${r.code}\nالباسورد: ${r.password}\n\n(الكود بيشتغل مرة واحدة بس، وبينتهي بعد 48 ساعة)`;
-    view.querySelector("#out").innerHTML = `<div class="banner ok" style="margin-top:12px;white-space:pre-wrap;direction:rtl">${esc(msg)}</div>
-      <div class="btns"><button class="btn" id="cp">نسخ الرسالة</button><a class="btn g" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank">ابعت واتساب</a></div>
-      <p style="color:var(--mut);font-size:12.5px">الكود والباسورد مش هيظهروا تاني. ابعتهم دلوقتي.</p>`;
-    view.querySelector("#cp").onclick = ()=>navigator.clipboard.writeText(msg).then(()=>alert("اتنسخت"));
+    const msg = fmt(t("inviteMsg"),{n:name,u:location.origin+location.pathname,c:r.code,p:r.password});
+    view.querySelector("#out").innerHTML = `<div class="banner" style="margin-top:12px;white-space:pre-wrap">${esc(msg)}</div>
+      <div class="btns"><button class="btn" id="cp">${t("copy")}</button><a class="btn o" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank">${t("sendWa")}</a></div>
+      <p style="color:var(--mut);font-size:12.5px">${t("shownOnce")}</p>`;
+    view.querySelector("#cp").onclick = ()=>navigator.clipboard.writeText(msg).then(()=>{ view.querySelector("#cp").textContent=t("copied"); });
   };
-  view.querySelector("#mk").onclick = async()=>{ const name=view.querySelector("#nm").value.trim(); if(!name) return alert("اكتب الاسم");
-    try{ const r=await team("create-invite",{name,role:view.querySelector("#adm").checked?"admin":"agent"}); show(r,name);}catch(e){alert(e.message);} };
-  view.querySelectorAll("[data-reset]").forEach(b=>b.onclick=async()=>{ if(!confirm(`كود جديد لـ ${b.dataset.name}؟ (لو غيّر موبايله أو خرج)`)) return;
-    try{ const r=await team("create-invite",{name:b.dataset.name,user_id:b.dataset.reset}); window.scrollTo(0,0); show(r,b.dataset.name);}catch(e){alert(e.message);} });
-  view.querySelectorAll("[data-tg]").forEach(b=>b.onclick=async()=>{ if(!confirm(b.dataset.on==="1"?"تفعيل الشخص ده تاني؟":"إيقاف الشخص ده؟ مش هيقدر يفتح التطبيق خالص.")) return;
-    try{ await team(b.dataset.on==="1"?"activate":"deactivate",{user_id:b.dataset.tg}); teamView(); }catch(e){alert(e.message);} });
+  view.querySelector("#mk").onclick = async()=>{ const name=view.querySelector("#nm").value.trim(); if(!name) return alert(t("enterName"));
+    try{ const r=await team("create-invite",{name,role:view.querySelector("#adm").checked?"admin":"agent"}); show(r,name);}catch(e){alert(errMsg(e));} };
+  view.querySelectorAll("[data-reset]").forEach(b=>b.onclick=async()=>{ if(!confirm(fmt(t("confirmReset"),{n:b.dataset.name}))) return;
+    try{ const r=await team("create-invite",{name:b.dataset.name,user_id:b.dataset.reset}); window.scrollTo(0,0); show(r,b.dataset.name);}catch(e){alert(errMsg(e));} });
+  view.querySelectorAll("[data-tg]").forEach(b=>b.onclick=async()=>{ if(!confirm(b.dataset.on==="1"?t("confirmAct"):t("confirmStop"))) return;
+    try{ await team(b.dataset.on==="1"?"activate":"deactivate",{user_id:b.dataset.tg}); teamView(); }catch(e){alert(errMsg(e));} });
   view.querySelectorAll("[data-cancel]").forEach(b=>b.onclick=async()=>{ await team("cancel-invite",{id:b.dataset.cancel}); teamView(); });
 }
-
 sb.auth.onAuthStateChange((e)=>{ if(e==="SIGNED_OUT"){ me=null; } });
 start();
 </script>

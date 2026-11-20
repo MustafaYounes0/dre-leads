@@ -3,10 +3,10 @@ self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (e) => e.waitUntil(self.clients.claim()));
 self.addEventListener("push", (event) => {
   let d = {};
-  try { d = event.data ? event.data.json() : {}; } catch { d = { title: "عميل جديد", body: event.data?.text() }; }
-  event.waitUntil(self.registration.showNotification(d.title || "🔔 عميل جديد", {
+  try { d = event.data ? event.data.json() : {}; } catch { d = { title: "Y CRM", body: event.data?.text() }; }
+  event.waitUntil(self.registration.showNotification(d.title || "Y CRM", {
     body: d.body || "", icon: "icon-192.png", badge: "icon-192.png",
-    tag: d.tag || undefined, renotify: true, requireInteraction: true, dir: "rtl", lang: "ar",
+    tag: d.tag || undefined, renotify: true, requireInteraction: true, 
     data: { url: d.url || "./" }, vibrate: [200, 100, 200],
   }));
 });

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0b1f3a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Y CRM">
 <meta name="application-name" content="Y CRM">
 <link rel="manifest" href="manifest.webmanifest">
@@ -14,55 +14,62 @@
 <link rel="icon" href="icon-192.png">
 <title>Y CRM</title>
 <style>
-:root{--bg:#f5f5f5;--card:#fff;--ink:#000;--mut:#6b6b6b;--line:#e3e3e3;--soft:#f0f0f0}
+:root{--bg:#f4f6f9;--card:#fff;--ink:#0b1f3a;--mut:#64708a;--line:#e2e7ee;--soft:#eef2f7}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Helvetica Neue",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom)}
-header{position:sticky;top:0;z-index:5;background:#000;color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
+header{position:sticky;top:0;z-index:5;background:#0b1f3a;color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
 .logo{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:-.03em;font-size:21px;direction:ltr}
 header h1{font-size:18px;margin:0;flex:1;font-weight:700}
-header button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:7px 11px;font-size:13px}
+header button{background:rgba(255,255,255,.08);color:#fff;border:0;border-radius:12px;width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+header button:active{background:rgba(255,255,255,.2)}
+.i{flex:0 0 auto;vertical-align:middle}
+[dir=rtl] .flip{transform:scaleX(-1)}
+.hd{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:16px}
+.hd .i{color:#0b1f3a}
+.lbl{display:inline-flex;align-items:center;gap:6px}
+.empty .i{display:block;margin:0 auto 10px;opacity:.5}
 main{padding:12px;max-width:640px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
 .tabs button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 12px;font-size:13px;color:var(--ink)}
-.tabs button.on{background:#000;color:#fff;border-color:#000}
-.count{display:inline-block;min-width:18px;margin-inline-start:6px;padding:0 5px;border-radius:9px;background:#000;color:#fff;font-size:11.5px;text-align:center}
-.tabs button.on .count{background:#fff;color:#000}
+.tabs button.on{background:#0b1f3a;color:#fff;border-color:#0b1f3a}
+.count{display:inline-block;min-width:18px;margin-inline-start:6px;padding:0 5px;border-radius:9px;background:#0b1f3a;color:#fff;font-size:11.5px;text-align:center}
+.tabs button.on .count{background:#fff;color:#0b1f3a}
 .lead{display:flex;gap:10px;align-items:center}
-.av{width:42px;height:42px;border-radius:50%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
+.av{width:42px;height:42px;border-radius:50%;background:#0b1f3a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
 .t{flex:1;min-width:0}
 .n{font-weight:700;font-size:15px}
 .s{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;border:1px solid #000;color:#000;background:#fff}
-.pill.new{background:#000;color:#fff}
+.pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;border:1px solid #0b1f3a;color:#0b1f3a;background:#fff}
+.pill.new{background:#0b1f3a;color:#fff}
 .pill.lost,.pill.broker{border-color:#bbb;color:#888}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid #000;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:#000;color:#fff;flex:1;text-align:center;text-decoration:none;font-family:inherit}
-.btn.l{background:#fff;color:#000;border-color:var(--line)}
-.btn.o{background:#fff;color:#000;border-color:#000}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #0b1f3a;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:#0b1f3a;color:#fff;flex:1;text-align:center;text-decoration:none;font-family:inherit}
+.btn.l{background:#fff;color:#0b1f3a;border-color:var(--line)}
+.btn.o{background:#fff;color:#0b1f3a;border-color:#0b1f3a}
 .btn.sm{padding:6px 10px;font-size:13px;flex:0 0 auto}
 .btn:disabled{opacity:.5}
 .kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
-.kv:last-child{border:0}.kv b{color:var(--mut);font-weight:500}
+.kv:last-child{border:0}.kv b{color:var(--mut);font-weight:500;display:inline-flex;align-items:center;gap:6px}
 .st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px;color:#000;font-family:inherit}
-.st button.on{background:#000;color:#fff;border-color:#000}
-input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px;color:#000}
+.st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px;color:#0b1f3a;font-family:inherit}
+.st button.on{background:#0b1f3a;color:#fff;border-color:#0b1f3a}
+input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px;color:#0b1f3a}
 textarea{min-height:70px}
 label{font-size:13px;color:var(--mut)}
-.note{border-inline-start:3px solid #000;padding:6px 10px;margin:8px 0;background:var(--soft);border-radius:6px;font-size:14px}
+.note{border-inline-start:3px solid #0b1f3a;padding:6px 10px;margin:8px 0;background:var(--soft);border-radius:6px;font-size:14px}
 .note small{display:block;color:var(--mut);font-size:11.5px}
 .empty{text-align:center;color:var(--mut);padding:40px 10px}
-.banner{background:#fff;border:1px solid #000;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
-.banner.dark{background:#000;color:#fff}
-.banner.dark .btn{background:#fff;color:#000;border-color:#fff}
+.banner{background:#fff;border:1px solid #0b1f3a;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
+.banner.dark{background:#0b1f3a;color:#fff}
+.banner.dark .btn{background:#fff;color:#0b1f3a;border-color:#fff}
 .banner.dark .btn.l{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
 .hidden{display:none!important}
 .center{max-width:400px;margin:30px auto}
-.err{color:#000;font-weight:600;font-size:14px;min-height:20px}
-.seg{display:flex;border:1px solid #000;border-radius:10px;overflow:hidden}
-.seg button{flex:1;border:0;background:#fff;color:#000;padding:10px;font-size:14px;font-family:inherit}
-.seg button.on{background:#000;color:#fff}
+.err{color:#0b1f3a;font-weight:600;font-size:14px;min-height:20px}
+.seg{display:flex;border:1px solid #0b1f3a;border-radius:10px;overflow:hidden}
+.seg button{flex:1;border:0;background:#fff;color:#0b1f3a;padding:10px;font-size:14px;font-family:inherit}
+.seg button.on{background:#0b1f3a;color:#fff}
 .big-logo{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:40px;direction:ltr;text-align:center;margin:6px 0 2px}
 ol{padding-inline-start:20px;line-height:2}
 </style>
@@ -82,6 +89,40 @@ const URL_ = "https://qeushgyngveloqlgvdzg.supabase.co";
 const KEY = "sb_publishable_62MmrfPqBg-no79xn0HvFA_b7VhlQa4";
 const VAPID = "BMV0dCIvzyCS5vrptD9BBaB0mnw-sVXuMc3uxeiVAOqqlF8xhEvBBDPkOVNvK2maoK-kG6CvZaljqZh0bGVUSkQ";
 const sb = createClient(URL_, KEY, { auth: { persistSession: true, autoRefreshToken: true } });
+
+
+// ---------------- icons (Lucide, MIT) ----------------
+const I = {
+ back:'<path d="m15 18-6-6 6-6"/>',
+ refresh:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',
+ settings:'<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+ users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+ userPlus:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M22 11h-6"/>',
+ user:'<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+ key:'<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/>',
+ clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+ phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+ chat:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+ bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+ face:'<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/>',
+ globe:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+ download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
+ logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>',
+ copy:'<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+ send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+ check:'<path d="M20 6 9 17l-5-5"/>',
+ calendar:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/>',
+ tag:'<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/>',
+ note:'<path d="M12 20h9"/><path d="M16.4 3.6a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/>',
+ info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+ lock:'<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+ inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+ x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+ ban:'<circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/>',
+ alert:'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+};
+const ic = (n, s=18, cls="") => `<svg class="i ${cls}" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const hd = (n, txt) => `<h3 class="hd">${ic(n,19)}${txt}</h3>`;
 
 // ---------------- language ----------------
 const T = {
@@ -158,7 +199,7 @@ let LANG = (()=>{ try { return localStorage.getItem("lang") || ((navigator.langu
 const t = (k)=> T[LANG][k] ?? k;
 const fmt = (s,o)=> s.replace(/\{(\w)\}/g,(_,k)=>o[k]??"");
 function applyLang(){ document.documentElement.lang=LANG; document.documentElement.dir=LANG==="ar"?"rtl":"ltr";
-  document.getElementById("backBtn").textContent = t("back"); document.getElementById("refreshBtn").textContent = t("refresh"); document.getElementById("menuBtn").textContent = t("settings"); }
+  const hb=(id,n,k,c="")=>{const b=document.getElementById(id); b.innerHTML=ic(n,20,c); b.setAttribute("aria-label",t(k)); b.title=t(k);}; hb("backBtn","back","back","flip"); hb("refreshBtn","refresh","refresh"); hb("menuBtn","settings","settings"); }
 applyLang();
 const errMsg = (e)=> T[LANG].errors[e?.message] || T[LANG].errors.generic;
 
@@ -177,13 +218,13 @@ const label = (k) => k.replace(/_/g," ").replace(/[?؟]$/,"");
 const digits = (p) => String(p||"").replace(/[^\d]/g,"");
 const initial = (n)=> esc((String(n||"?").trim()[0]||"?").toUpperCase());
 function header(title, back=false){
-  document.getElementById("title").innerHTML = title ? esc(title) : `<span class="logo">Y CRM</span>`;
+  document.getElementById("title").innerHTML = title ? (typeof title==="object" ? `<span class="lbl">${ic(title[0],20)}${esc(title[1])}</span>` : esc(title)) : `<span class="logo">Y CRM</span>`;
   document.getElementById("backBtn").classList.toggle("hidden", !back);
   document.getElementById("refreshBtn").classList.toggle("hidden", back || !me);
   document.getElementById("menuBtn").classList.toggle("hidden", back || !me);
 }
 document.getElementById("backBtn").onclick = () => { location.hash = ""; };
-document.getElementById("refreshBtn").onclick = () => loadLeads();
+document.getElementById("refreshBtn").onclick = async () => { const b=document.getElementById("refreshBtn"); b.style.opacity=".5"; await loadLeads(); b.style.opacity=""; };
 document.getElementById("menuBtn").onclick = () => { location.hash = "settings"; };
 
 // ---------------- server calls ----------------
@@ -210,7 +251,7 @@ function loginView(){
     <label>${t("code")}</label><input id="code" dir="ltr" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX">
     <label>${t("password")}</label><input id="pw" type="password" inputmode="numeric" dir="ltr" autocomplete="one-time-code">
     <div class="err" id="err"></div>
-    <button class="btn" id="go" style="width:100%">${t("login")}</button>
+    <button class="btn" id="go" style="width:100%">${ic("key")}${t("login")}</button>
     <p style="color:var(--mut);font-size:12.5px;text-align:center">${t("oneTime")}</p>${langSwitch()}</div>`;
   bindLang();
   const b = view.querySelector("#go");
@@ -222,7 +263,7 @@ function loginView(){
     } catch(e){ err.textContent = errMsg(e); } finally { b.disabled=false; }
   };
 }
-function langSwitch(){ return `<div style="margin-top:14px"><label>${t("lang")}</label><div class="seg" style="margin-top:6px"><button data-lang="ar" class="${LANG==="ar"?"on":""}">العربية</button><button data-lang="en" class="${LANG==="en"?"on":""}">English</button></div></div>`; }
+function langSwitch(flat=false){ return `<div style="margin-top:${flat?0:14}px"><label class="lbl">${ic("globe",15)}${t("lang")}</label><div class="seg" style="margin-top:6px"><button data-lang="ar" class="${LANG==="ar"?"on":""}">العربية</button><button data-lang="en" class="${LANG==="en"?"on":""}">English</button></div></div>`; }
 function bindLang(){ view.querySelectorAll("[data-lang]").forEach(b=>b.onclick=async()=>{ LANG=b.dataset.lang; try{localStorage.setItem("lang",LANG);}catch{} applyLang(); await syncPushLang(); me?route():loginView(); }); }
 
 // ---------------- biometric lock (WebAuthn on this device) ----------------
@@ -246,7 +287,7 @@ async function bioUnlock(){
 function lockView(){
   header("");
   view.innerHTML = `<div class="center card" style="text-align:center"><div class="big-logo">Y CRM</div>
-    <h2>${t("lockTitle")}</h2><div class="err" id="err"></div><button class="btn" id="un" style="width:100%">${t("unlock")}</button></div>`;
+    <div style="text-align:center;margin-bottom:6px">${ic("lock",34)}</div><h2>${t("lockTitle")}</h2><div class="err" id="err"></div><button class="btn" id="un" style="width:100%">${ic("face")}${t("unlock")}</button></div>`;
   const go = async()=>{ try{ await bioUnlock(); sessionStorage.setItem("unlocked","1"); start(true);}catch(e){ view.querySelector("#err").textContent=t("tryAgain"); } };
   view.querySelector("#un").onclick = go; go();
 }
@@ -318,13 +359,13 @@ async function route(){
 async function banners(){
   let out = "";
   if (sessionStorage.getItem("offerBio") && !bioOn())
-    out += `<div class="banner dark">${t("bioOffer")}<div class="btns" style="margin-top:10px"><button class="btn" id="bioYes">${t("enable")}</button><button class="btn l" id="bioNo">${t("notNow")}</button></div></div>`;
+    out += `<div class="banner dark"><span class="lbl">${ic("face")}${t("bioOffer")}</span><div class="btns" style="margin-top:10px"><button class="btn" id="bioYes">${ic("face")}${t("enable")}</button><button class="btn l" id="bioNo">${t("notNow")}</button></div></div>`;
   const st = await pushState();
   if (st==="on") return out;
   if (isIOS && !standalone) return out + `<div class="banner">${t("pushIos")}</div>`;
   if (st==="unsupported") return out + `<div class="banner">${t("pushUnsupported")}</div>`;
   if (st==="denied") return out + `<div class="banner">${t("pushDenied")}</div>`;
-  return out + `<div class="banner">${t("pushOffer")}<button class="btn" id="pushOn" style="margin-top:10px;width:100%">${t("pushEnable")}</button></div>`;
+  return out + `<div class="banner"><span class="lbl">${ic("bell")}${t("pushOffer")}</span><button class="btn" id="pushOn" style="margin-top:10px;width:100%">${ic("bell")}${t("pushEnable")}</button></div>`;
 }
 async function listView(){
   header("");
@@ -341,7 +382,7 @@ async function listView(){
       return `<div class="card lead" data-id="${l.id}"><div class="av">${initial(l.full_name)}</div>
         <div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s">${esc(sub||l.phone)}</div></div>
         <div style="text-align:end"><span class="pill ${l.status}">${T[LANG].status[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
-    }).join("") : `<div class="empty">${t("noLeads")}</div>`);
+    }).join("") : `<div class="empty">${ic("inbox",36)}${t("noLeads")}</div>`);
   view.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f; listView();});
   view.querySelectorAll(".lead").forEach(c=>c.onclick=()=>{location.hash="lead/"+c.dataset.id;});
   const p = view.querySelector("#pushOn"); if(p) p.onclick = enablePush;
@@ -358,17 +399,17 @@ async function leadView(id){
   const fu = l.next_follow_up ? new Date(l.next_follow_up) : null;
   const fuVal = fu ? new Date(fu.getTime()-fu.getTimezoneOffset()*60000).toISOString().slice(0,16) : "";
   view.innerHTML = `
-  ${l.is_broker?`<div class="banner dark">${t("brokerWarn")}</div>`:""}
+  ${l.is_broker?`<div class="banner dark"><span class="lbl">${ic("alert")}${t("brokerWarn")}</span></div>`:""}
   <div class="card"><div class="lead"><div class="av">${initial(l.full_name)}</div><div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s" dir="ltr" style="text-align:start">${esc(l.phone)}</div></div></div>
-    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">${t("call")}</a><a class="btn o" href="https://wa.me/${ph}" target="_blank">${t("whatsapp")}</a></div></div>
-  <div class="card"><label>${t("stat")}</label><div class="st" style="margin-top:6px">${Object.entries(T[LANG].status).map(([k,v])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${v}</button>`).join("")}</div></div>
+    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">${ic("phone")}${t("call")}</a><a class="btn o" href="https://wa.me/${ph}" target="_blank">${ic("chat")}${t("whatsapp")}</a></div></div>
+  <div class="card"><label class="lbl">${ic("tag",15)}${t("stat")}</label><div class="st" style="margin-top:6px">${Object.entries(T[LANG].status).map(([k,v])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${v}</button>`).join("")}</div></div>
   <div class="card">${Object.entries(l.answers||{}).map(([k,v])=>`<div class="kv"><b>${esc(label(k))}</b><span>${esc(v)}</span></div>`).join("")}
     ${l.email?`<div class="kv"><b>${t("email")}</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
-    <div class="kv"><b>${t("source")}</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
-    <div class="kv"><b>${t("time")}</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</span></div></div>
-  <div class="card"><label>${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
-    <label>${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
-    <button class="btn" id="save" style="width:100%">${t("save")}</button>
+    <div class="kv"><b>${ic("info",15)}${t("source")}</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
+    <div class="kv"><b>${ic("clock",15)}${t("time")}</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</span></div></div>
+  <div class="card"><label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
+    <label class="lbl">${ic("note",15)}${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
+    <button class="btn" id="save" style="width:100%">${ic("check")}${t("save")}</button>
     ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
   view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); await loadLeads(); });
   view.querySelector("#save").onclick = async () => {
@@ -379,17 +420,17 @@ async function leadView(id){
   };
 }
 async function settingsView(){
-  header(t("settings"), true);
+  header(["settings",t("settings")], true);
   const st = await pushState();
-  view.innerHTML = `<div class="card"><div class="kv"><b>${t("name")}</b><span>${esc(me.display_name)}</span></div><div class="kv"><b>${t("role")}</b><span>${me.role==="admin"?t("admin"):t("agent")}</span></div></div>
-  <div class="card">${langSwitch().replace('style="margin-top:14px"','')}</div>
-  <div class="card"><div class="kv"><b>${t("pushOnDevice")}</b><span>${st==="on"?t("on"):t("off")}</span></div>
-    <div class="btns" style="margin-top:10px">${st==="on"?`<button class="btn l" id="tp">${t("testPush")}</button>`:`<button class="btn" id="en">${t("pushEnable")}</button>`}</div></div>
-  <div class="card"><div class="kv"><b>${t("bio")}</b><span>${bioOn()?t("on"):t("off")}</span></div>
-    ${bioOn()?`<button class="btn l" id="bioOff" style="width:100%;margin-top:8px">${t("bioDisable")}</button>`:`<button class="btn" id="bioOn" style="width:100%;margin-top:8px">${t("bioEnable")}</button>`}</div>
-  ${me.role==="admin"?`<div class="card"><button class="btn" id="teamBtn" style="width:100%">${t("team")}</button></div>`:""}
-  <div class="card"><button class="btn l" id="csv" style="width:100%">${t("csv")}</button></div>
-  <div class="card"><button class="btn o" id="out" style="width:100%">${t("logout")}</button>
+  view.innerHTML = `<div class="card"><div class="kv"><b>${ic("user",15)}${t("name")}</b><span>${esc(me.display_name)}</span></div><div class="kv"><b>${ic("key",15)}${t("role")}</b><span>${me.role==="admin"?t("admin"):t("agent")}</span></div></div>
+  <div class="card">${langSwitch(true)}</div>
+  <div class="card"><div class="kv"><b>${ic("bell",15)}${t("pushOnDevice")}</b><span>${st==="on"?t("on"):t("off")}</span></div>
+    <div class="btns" style="margin-top:10px">${st==="on"?`<button class="btn l" id="tp">${ic("send")}${t("testPush")}</button>`:`<button class="btn" id="en">${ic("bell")}${t("pushEnable")}</button>`}</div></div>
+  <div class="card"><div class="kv"><b>${ic("face",15)}${t("bio")}</b><span>${bioOn()?t("on"):t("off")}</span></div>
+    ${bioOn()?`<button class="btn l" id="bioOff" style="width:100%;margin-top:8px">${ic("x")}${t("bioDisable")}</button>`:`<button class="btn" id="bioOn" style="width:100%;margin-top:8px">${ic("face")}${t("bioEnable")}</button>`}</div>
+  ${me.role==="admin"?`<div class="card"><button class="btn" id="teamBtn" style="width:100%">${ic("users")}${t("team")}</button></div>`:""}
+  <div class="card"><button class="btn l" id="csv" style="width:100%">${ic("download")}${t("csv")}</button></div>
+  <div class="card"><button class="btn o" id="out" style="width:100%">${ic("logout")}${t("logout")}</button>
     <p style="color:var(--mut);font-size:12.5px;margin-bottom:0">${t("logoutNote")}</p></div>`;
   bindLang();
   const tp=view.querySelector("#tp"); if(tp) tp.onclick=testPush;
@@ -408,27 +449,27 @@ async function settingsView(){
   };
 }
 async function teamView(){
-  header(t("team"), true);
+  header(["users",t("team")], true);
   view.innerHTML = `<div class="empty">${t("loading")}</div>`;
   let d; try { d = await team("list"); } catch(e){ view.innerHTML = `<div class="empty">${esc(errMsg(e))}</div>`; return; }
   view.innerHTML = `
-  <div class="card"><h3 style="margin-top:0">${t("invite")}</h3>
+  <div class="card">${hd("userPlus",t("invite"))}
     <label>${t("personName")}</label><input id="nm" placeholder="${t("personPh")}">
     <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="adm" style="width:auto;margin:0">${t("makeAdmin")}</label>
-    <button class="btn" id="mk" style="width:100%;margin-top:10px">${t("makeCode")}</button>
+    <button class="btn" id="mk" style="width:100%;margin-top:10px">${ic("key")}${t("makeCode")}</button>
     <div id="out"></div></div>
-  <div class="card"><h3 style="margin-top:0">${t("members")}</h3>
+  <div class="card">${hd("users",t("members"))}
     ${(d.members||[]).map(m=>`<div class="kv"><span>${esc(m.display_name)} ${m.role==="admin"?`<span class="pill">${t("admin")}</span>`:""} ${m.active?"":`<span class="pill lost">${t("stopped")}</span>`}<br><small style="color:var(--mut)">${m.last_seen?t("lastSeen")+" "+ago(m.last_seen):""}</small></span>
-      <span>${m.user_id===me.user_id?t("you"):`<button class="btn l sm" data-reset="${m.user_id}" data-name="${esc(m.display_name)}">${t("newCode")}</button>
-      <button class="btn o sm" data-tg="${m.user_id}" data-on="${m.active?0:1}">${m.active?t("stop"):t("activate")}</button>`}</span></div>`).join("")}</div>
-  <div class="card"><h3 style="margin-top:0">${t("pending")}</h3>
-    ${(d.invites||[]).length?(d.invites).map(i=>`<div class="kv"><span>${esc(i.display_name)}<br><small style="color:var(--mut)">${t("expires")} ${new Date(i.expires_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</small></span><button class="btn o sm" data-cancel="${i.id}">${t("cancel")}</button></div>`).join(""):`<div style="color:var(--mut)">${t("none")}</div>`}</div>`;
+      <span>${m.user_id===me.user_id?t("you"):`<button class="btn l sm" data-reset="${m.user_id}" data-name="${esc(m.display_name)}">${ic("key",15)}${t("newCode")}</button>
+      <button class="btn o sm" data-tg="${m.user_id}" data-on="${m.active?0:1}">${m.active?ic("ban",15)+t("stop"):ic("check",15)+t("activate")}</button>`}</span></div>`).join("")}</div>
+  <div class="card">${hd("clock",t("pending"))}
+    ${(d.invites||[]).length?(d.invites).map(i=>`<div class="kv"><span>${esc(i.display_name)}<br><small style="color:var(--mut)">${t("expires")} ${new Date(i.expires_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</small></span><button class="btn o sm" data-cancel="${i.id}">${ic("x",15)}${t("cancel")}</button></div>`).join(""):`<div style="color:var(--mut)">${t("none")}</div>`}</div>`;
   const show = (r, name) => {
     const msg = fmt(t("inviteMsg"),{n:name,u:location.origin+location.pathname,c:r.code,p:r.password});
     view.querySelector("#out").innerHTML = `<div class="banner" style="margin-top:12px;white-space:pre-wrap">${esc(msg)}</div>
-      <div class="btns"><button class="btn" id="cp">${t("copy")}</button><a class="btn o" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank">${t("sendWa")}</a></div>
+      <div class="btns"><button class="btn" id="cp">${ic("copy")}${t("copy")}</button><a class="btn o" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank">${ic("chat")}${t("sendWa")}</a></div>
       <p style="color:var(--mut);font-size:12.5px">${t("shownOnce")}</p>`;
-    view.querySelector("#cp").onclick = ()=>navigator.clipboard.writeText(msg).then(()=>{ view.querySelector("#cp").textContent=t("copied"); });
+    view.querySelector("#cp").onclick = ()=>navigator.clipboard.writeText(msg).then(()=>{ view.querySelector("#cp").innerHTML=ic("check")+t("copied"); });
   };
   view.querySelector("#mk").onclick = async()=>{ const name=view.querySelector("#nm").value.trim(); if(!name) return alert(t("enterName"));
     try{ const r=await team("create-invite",{name,role:view.querySelector("#adm").checked?"admin":"agent"}); show(r,name);}catch(e){alert(errMsg(e));} };

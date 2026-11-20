@@ -146,7 +146,7 @@ const T = {
   tabs:{new:"جديد",all:"الكل",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسطاء",followup:"المتابعات"},
   status:{new:"جديد",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسيط"},
   noLeads:"لا يوجد عملاء هنا بعد.", noName:"بدون اسم",
-  owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
+  pastDate:"لا يمكن اختيار موعد في وقت مضى. اختر موعدًا قادمًا.", owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
   leadTitle:"تفاصيل العميل", call:"اتصال", whatsapp:"واتساب", stat:"الحالة",
   brokerWarn:"اختار هذا العميل أنه وسيط عقاري.", email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
   followup:"موعد المتابعة القادم", newNote:"ملاحظة جديدة", notePh:"مثال: الميزانية 700 ألف، يريد استوديو جاهزًا، المعاينة يوم الخميس.", save:"حفظ", notFound:"العميل غير موجود.",
@@ -181,7 +181,7 @@ const T = {
   tabs:{new:"New",all:"All",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Brokers",followup:"Follow-ups"},
   status:{new:"New",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Broker"},
   noLeads:"No leads here yet.", noName:"No name",
-  owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
+  pastDate:"You can't pick a time in the past. Choose an upcoming time.", owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
   leadTitle:"Lead details", call:"Call", whatsapp:"WhatsApp", stat:"Status",
   brokerWarn:"This lead said they are a real-estate broker.", email:"Email", source:"Source", time:"Submitted",
   followup:"Next follow-up", newNote:"New note", notePh:"e.g. Budget 700K, wants a ready studio, viewing on Thursday.", save:"Save", notFound:"Lead not found.",
@@ -446,7 +446,7 @@ async function leadView(id){
     <div class="kv"><b>${ic("info",15)}${t("source")}</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
     <div class="kv"><b>${ic("clock",15)}${t("time")}</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString(LANG==="ar"?"ar-EG":"en-GB")}</span></div></div>
   <div class="card"><label class="lbl">${ic("user",15)}${t("owner")}</label><select id="ow"><option value="">${t("unassigned")}</option>${members.filter(m=>m.active||m.user_id===l.assigned_to).map(m=>`<option value="${m.user_id}" ${l.assigned_to===m.user_id?"selected":""}>${esc(m.display_name)}</option>`).join("")}</select>
-    <label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}">
+    <label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}" min="${new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}">
     <label class="lbl">${ic("note",15)}${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
     <button class="btn" id="save" style="width:100%">${ic("check")}${t("save")}</button>
     ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
@@ -454,7 +454,11 @@ async function leadView(id){
   view.querySelector("#ow").onchange = async (e) => { await sb.from("leads").update({ assigned_to: e.target.value || null }).eq("id",id); await loadLeads(); };
   view.querySelector("#save").onclick = async () => {
     const body = view.querySelector("#nt").value.trim(); const f = view.querySelector("#fu").value;
-    await sb.from("leads").update({ next_follow_up: f ? new Date(f).toISOString() : null }).eq("id",id);
+    const prev = l.next_follow_up ? new Date(l.next_follow_up).getTime() : null, nf = f ? new Date(f).getTime() : null;
+    if (nf && nf !== prev && nf < Date.now() - 60000) { alert(t("pastDate")); return; }
+    const upd = { next_follow_up: nf ? new Date(nf).toISOString() : null };
+    if (nf && nf !== prev && l.status === "new") upd.status = "contacted";
+    await sb.from("leads").update(upd).eq("id",id);
     if (body) await sb.from("lead_notes").insert({ lead_id:id, body, author:me.user_id });
     await loadLeads();
   };

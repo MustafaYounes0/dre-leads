@@ -63,6 +63,14 @@ label{font-size:13px;color:var(--mut)}
 .note{border-inline-start:3px solid #0b1f3a;padding:6px 10px;margin:8px 0;background:var(--soft);border-radius:6px;font-size:14px}
 .note small{display:block;color:var(--mut);font-size:11.5px}
 .empty{text-align:center;color:var(--mut);padding:40px 10px}
+.sheet-bg{position:fixed;inset:0;background:rgba(11,31,58,.45);z-index:50;display:flex;align-items:flex-end}
+.sheet{background:#fff;width:100%;max-width:640px;margin:0 auto;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));max-height:85vh;overflow:auto}
+.sheet h3{margin:0 0 12px;font-size:17px}
+.sheet .btn{width:100%;margin-bottom:8px;justify-content:flex-start}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.chips .btn{margin:0;justify-content:center;font-size:14px;padding:11px 8px}
+.act{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.act small{color:var(--mut);margin-inline-start:auto;font-size:11.5px;text-align:end}
 .banner{background:#fff;border:1px solid #0b1f3a;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
 .banner.dark{background:#0b1f3a;color:#fff}
 .banner.dark .btn{background:#fff;color:#0b1f3a;border-color:#fff}
@@ -146,7 +154,7 @@ const T = {
   tabs:{new:"جديد",all:"الكل",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسطاء",followup:"المتابعات"},
   status:{new:"جديد",contacted:"تم التواصل",no_answer:"لم يرد",interested:"مهتم",viewing:"معاينة",won:"تم البيع",lost:"غير مهتم",broker:"وسيط"},
   noLeads:"لا يوجد عملاء هنا بعد.", noName:"بدون اسم",
-  pastDate:"لا يمكن اختيار موعد في وقت مضى. اختر موعدًا قادمًا.", owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
+  ocTitleCall:"ما نتيجة المكالمة؟", ocTitleWa:"ما نتيجة المحادثة على واتساب؟", oc:{no_answer:"لم يرد",contacted:"رد وتم التواصل",interested:"مهتم",viewing:"حجز معاينة",lost:"غير مهتم"}, skipLog:"إغلاق دون تسجيل", nextTitle:"متى المتابعة القادمة؟", viewTitle:"متى موعد المعاينة؟", in2h:"بعد ساعتين", tom11:"غدًا 11 صباحًا", in2d:"بعد يومين", in1w:"بعد أسبوع", noDate:"بدون موعد", pickDate:"أو اختر موعدًا", logBtn:"تسجيل نتيجة تواصل", attempts:"محاولات الاتصال: {n}", lastTry:"آخر محاولة {x}", actCall:"مكالمة", actWa:"واتساب", history:"سجل التواصل والملاحظات", pastDate:"لا يمكن اختيار موعد في وقت مضى. اختر موعدًا قادمًا.", owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
   leadTitle:"تفاصيل العميل", call:"اتصال", whatsapp:"واتساب", stat:"الحالة",
   brokerWarn:"اختار هذا العميل أنه وسيط عقاري.", email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
   followup:"موعد المتابعة القادم", newNote:"ملاحظة جديدة", notePh:"مثال: الميزانية 700 ألف، يريد استوديو جاهزًا، المعاينة يوم الخميس.", save:"حفظ", notFound:"العميل غير موجود.",
@@ -181,7 +189,7 @@ const T = {
   tabs:{new:"New",all:"All",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Brokers",followup:"Follow-ups"},
   status:{new:"New",contacted:"Contacted",no_answer:"No answer",interested:"Interested",viewing:"Viewing",won:"Sold",lost:"Not interested",broker:"Broker"},
   noLeads:"No leads here yet.", noName:"No name",
-  pastDate:"You can't pick a time in the past. Choose an upcoming time.", owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
+  ocTitleCall:"How did the call go?", ocTitleWa:"How did the WhatsApp chat go?", oc:{no_answer:"No answer",contacted:"Answered, spoke",interested:"Interested",viewing:"Booked a viewing",lost:"Not interested"}, skipLog:"Close without logging", nextTitle:"When is the next follow-up?", viewTitle:"When is the viewing?", in2h:"In 2 hours", tom11:"Tomorrow 11 AM", in2d:"In 2 days", in1w:"In a week", noDate:"No date", pickDate:"Or pick a time", logBtn:"Log contact outcome", attempts:"Call attempts: {n}", lastTry:"last {x}", actCall:"Call", actWa:"WhatsApp", history:"Contact history & notes", pastDate:"You can't pick a time in the past. Choose an upcoming time.", owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
   leadTitle:"Lead details", call:"Call", whatsapp:"WhatsApp", stat:"Status",
   brokerWarn:"This lead said they are a real-estate broker.", email:"Email", source:"Source", time:"Submitted",
   followup:"Next follow-up", newNote:"New note", notePh:"e.g. Budget 700K, wants a ready studio, viewing on Thursday.", save:"Save", notFound:"Lead not found.",
@@ -300,7 +308,7 @@ let hiddenAt = 0;
 document.addEventListener("visibilitychange", ()=>{
   if(document.hidden){ hiddenAt=Date.now(); return; }
   if(bioOn() && me && Date.now()-hiddenAt>5*60*1000){ sessionStorage.removeItem("unlocked"); return lockView(); }
-  if(me) loadLeads();
+  if(me) loadLeads().then(()=>setTimeout(checkPending,300));
 });
 
 // ---------------- session ----------------
@@ -433,13 +441,18 @@ async function leadView(id){
   if (!l){ const { data } = await sb.from("leads").select("*").eq("id",id).maybeSingle(); l=data; }
   if (!l){ view.innerHTML = `<div class="empty">${t("notFound")}</div>`; return; }
   const { data: notes } = await sb.from("lead_notes").select("*, members(display_name)").eq("lead_id",id).order("created_at",{ascending:false});
+  const { data: acts } = await sb.from("lead_activity").select("*, members(display_name)").eq("lead_id",id).order("created_at",{ascending:false});
+  const calls = (acts||[]).filter(a=>a.kind==="call");
+  const timeline = [...(acts||[]).map(a=>({a, at:a.created_at})), ...(notes||[]).map(n=>({n, at:n.created_at}))].sort((x,y)=>new Date(y.at)-new Date(x.at));
   const ph = digits(l.phone);
   const fu = l.next_follow_up ? new Date(l.next_follow_up) : null;
   const fuVal = fu ? new Date(fu.getTime()-fu.getTimezoneOffset()*60000).toISOString().slice(0,16) : "";
   view.innerHTML = `
   ${l.is_broker?`<div class="banner dark"><span class="lbl">${ic("alert")}${t("brokerWarn")}</span></div>`:""}
   <div class="card"><div class="lead"><div class="av">${initial(l.full_name)}</div><div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s" dir="ltr" style="text-align:start">${esc(l.phone)}</div></div></div>
-    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">${ic("phone")}${t("call")}</a><a class="btn o" href="https://wa.me/${ph}" target="_blank">${ic("chat")}${t("whatsapp")}</a></div></div>
+    <div class="btns" style="margin-top:12px"><a class="btn" id="callBtn" href="tel:+${ph}">${ic("phone")}${t("call")}</a><a class="btn o" id="waBtn" href="https://wa.me/${ph}" target="_blank">${ic("chat")}${t("whatsapp")}</a></div>
+    <button class="btn l" id="logBtn" style="width:100%;margin-top:8px">${ic("check")}${t("logBtn")}</button>
+    <div class="s" style="margin-top:8px;text-align:center">${fmt(t("attempts"),{n:calls.length})}${calls[0]?` · ${fmt(t("lastTry"),{x:ago(calls[0].created_at)})}`:""}</div></div>
   <div class="card"><label class="lbl">${ic("tag",15)}${t("stat")}</label><div class="st" style="margin-top:6px">${Object.entries(T[LANG].status).map(([k,v])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${v}</button>`).join("")}</div></div>
   <div class="card">${Object.entries(l.answers||{}).map(([k,v])=>`<div class="kv"><b>${esc(label(k))}</b><span>${esc(v)}</span></div>`).join("")}
     ${l.email?`<div class="kv"><b>${t("email")}</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
@@ -449,8 +462,16 @@ async function leadView(id){
     <label class="lbl">${ic("calendar",15)}${t("followup")}</label><input type="datetime-local" id="fu" value="${fuVal}" min="${new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}">
     <label class="lbl">${ic("note",15)}${t("newNote")}</label><textarea id="nt" placeholder="${t("notePh")}"></textarea>
     <button class="btn" id="save" style="width:100%">${ic("check")}${t("save")}</button>
-    ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
+    </div>
+  ${timeline.length?`<div class="card">${hd("clock",t("history"))}${timeline.map(x=> x.a
+      ? `<div class="act">${ic(x.a.kind==="call"?"phone":"chat",16)}<span>${x.a.kind==="call"?t("actCall"):t("actWa")} · <b>${T[LANG].oc[x.a.outcome]}</b></span><small>${esc(x.a.members?.display_name||"")}<br>${ago(x.a.created_at)}</small></div>`
+      : `<div class="note">${esc(x.n.body)}<small>${esc(x.n.members?.display_name||"")} · ${ago(x.n.created_at)}</small></div>`).join("")}</div>`:""}`;
   view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); await loadLeads(); });
+  const mark = (kind)=>()=>{ try{ sessionStorage.setItem("pendingContact", JSON.stringify({id, kind, at:Date.now()})); }catch{} };
+  view.querySelector("#callBtn").onclick = mark("call");
+  view.querySelector("#waBtn").onclick = mark("whatsapp");
+  view.querySelector("#logBtn").onclick = ()=> outcomeSheet(l, "call");
+  checkPending();
   view.querySelector("#ow").onchange = async (e) => { await sb.from("leads").update({ assigned_to: e.target.value || null }).eq("id",id); await loadLeads(); };
   view.querySelector("#save").onclick = async () => {
     const body = view.querySelector("#nt").value.trim(); const f = view.querySelector("#fu").value;
@@ -461,6 +482,57 @@ async function leadView(id){
     if (body) await sb.from("lead_notes").insert({ lead_id:id, body, author:me.user_id });
     await loadLeads();
   };
+}
+
+// ---------------- contact outcome sheet ----------------
+function checkPending(){
+  let p; try { p = JSON.parse(sessionStorage.getItem("pendingContact")||"null"); } catch {}
+  if (!p || document.hidden || Date.now()-p.at < 3000 || document.querySelector(".sheet-bg")) return;
+  sessionStorage.removeItem("pendingContact");
+  if (Date.now()-p.at > 6*3600e3) return;
+  const l = leads.find(x=>x.id===p.id); if (!l) return;
+  if (location.hash !== "#lead/"+p.id) location.hash = "lead/"+p.id;
+  outcomeSheet(l, p.kind);
+}
+function closeSheet(){ document.querySelector(".sheet-bg")?.remove(); }
+function outcomeSheet(l, kind){
+  closeSheet();
+  const bg = document.createElement("div"); bg.className = "sheet-bg";
+  const OC = T[LANG].oc, icons = {no_answer:"phone",contacted:"check",interested:"tag",viewing:"calendar",lost:"x"};
+  bg.innerHTML = `<div class="sheet"><h3 class="hd">${ic(kind==="call"?"phone":"chat",19)}${kind==="call"?t("ocTitleCall"):t("ocTitleWa")}</h3>
+    <div class="s" style="margin:-6px 0 12px">${esc(l.full_name||t("noName"))}</div>
+    ${Object.keys(OC).map(k=>`<button class="btn ${k==="lost"?"o":k==="no_answer"?"l":""}" data-oc="${k}">${ic(icons[k])}${OC[k]}</button>`).join("")}
+    <button class="btn l" id="skip" style="justify-content:center;border:0">${t("skipLog")}</button></div>`;
+  document.body.appendChild(bg);
+  bg.onclick = (e)=>{ if(e.target===bg) closeSheet(); };
+  bg.querySelector("#skip").onclick = closeSheet;
+  bg.querySelectorAll("[data-oc]").forEach(b=>b.onclick=()=>{
+    const oc = b.dataset.oc;
+    if (oc==="lost") return saveOutcome(l, kind, oc, null);
+    dateStep(l, kind, oc);
+  });
+}
+function dateStep(l, kind, oc){
+  const sh = document.querySelector(".sheet"); if (!sh) return;
+  const at = (days, h, m=0)=>{ const d=new Date(); d.setDate(d.getDate()+days); d.setHours(h,m,0,0); return d; };
+  const opts = { in2h: new Date(Date.now()+2*3600e3), tom11: at(1,11), in2d: at(2,11), in1w: at(7,11) };
+  const minV = new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+  sh.innerHTML = `<h3 class="hd">${ic("calendar",19)}${oc==="viewing"?t("viewTitle"):t("nextTitle")}</h3>
+    <div class="s" style="margin:-6px 0 12px">${esc(l.full_name||t("noName"))} · ${T[LANG].oc[oc]}</div>
+    <div class="chips">${Object.keys(opts).map(k=>`<button class="btn l" data-d="${k}">${t(k)}</button>`).join("")}</div>
+    <label class="lbl">${ic("clock",15)}${t("pickDate")}</label><input type="datetime-local" id="sd" min="${minV}">
+    <button class="btn" id="sdSave" style="justify-content:center">${ic("check")}${t("save")}</button>
+    <button class="btn l" id="sdNone" style="justify-content:center">${t("noDate")}</button>`;
+  sh.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>saveOutcome(l, kind, oc, opts[b.dataset.d]));
+  sh.querySelector("#sdSave").onclick = ()=>{ const v = sh.querySelector("#sd").value; if(!v) return;
+    const d = new Date(v); if (d.getTime() < Date.now()-60000) return alert(t("pastDate")); saveOutcome(l, kind, oc, d); };
+  sh.querySelector("#sdNone").onclick = ()=>saveOutcome(l, kind, oc, null);
+}
+async function saveOutcome(l, kind, oc, date){
+  closeSheet();
+  await sb.from("lead_activity").insert({ lead_id:l.id, kind, outcome:oc, author:me.user_id });
+  await sb.from("leads").update({ status: oc, next_follow_up: date ? date.toISOString() : null }).eq("id", l.id);
+  await loadLeads();
 }
 async function settingsView(){
   header(["settings",t("settings")], true);

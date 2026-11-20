@@ -162,9 +162,7 @@ async function start(fresh=false){
   if (!m || !m.active) { await sb.auth.signOut(); return loginView(); }
   me = m;
   if (bioOn() && !sessionStorage.getItem("unlocked")) return lockView();
-  if (fresh && !bioOn() && await bioAvailable()) {
-    if (confirm("تفعّل الدخول ببصمة الوش / الصباع على الموبايل ده؟")) { try { await enableBio(); } catch(e){ alert("مقدرناش نفعّل البصمة: "+e.message); } }
-  }
+  if (fresh && !bioOn() && await bioAvailable()) sessionStorage.setItem("offerBio","1");
   await loadLeads();
   if (channel) sb.removeChannel(channel);
   channel = sb.channel("leads").on("postgres_changes",{event:"*",schema:"public",table:"leads"},()=>loadLeads()).subscribe();
@@ -214,8 +212,14 @@ async function route(){
 }
 
 async function pushBanner(){
+  const bio = (sessionStorage.getItem("offerBio") && !bioOn())
+    ? `<div class="banner ok" id="bioBox">🔐 تفعّل فتح التطبيق ببصمة الوش / الصباع على الموبايل ده؟
+        <div class="btns" style="margin-top:8px"><button class="btn" id="bioYes">تفعيل</button><button class="btn l" id="bioNo">مش دلوقتي</button></div></div>` : "";
   const st = await pushState();
-  if (st==="on") return "";
+  if (st==="on") return bio;
+  return bio + (await pushBannerInner(st));
+}
+async function pushBannerInner(st){
   if (isIOS && !standalone) return `<div class="banner">📲 علشان الإشعارات توصلك على الآيفون: دوس زرار <b>المشاركة</b> تحت ⬆️ وبعدين <b>Add to Home Screen</b>، وافتح التطبيق من الشاشة الرئيسية.</div>`;
   if (st==="unsupported") return `<div class="banner">المتصفح ده مش بيدعم الإشعارات. افتح اللينك من Chrome (أندرويد) أو Safari (آيفون).</div>`;
   if (st==="denied") return `<div class="banner">الإشعارات مقفولة. افتحها من إعدادات الموبايل للتطبيق ده.</div>`;
@@ -238,6 +242,8 @@ async function listView(){
   view.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f; listView();});
   view.querySelectorAll(".lead").forEach(c=>c.onclick=()=>{location.hash="lead/"+c.dataset.id;});
   const p = view.querySelector("#pushOn"); if(p) p.onclick = enablePush;
+  const by = view.querySelector("#bioYes"); if(by) by.onclick = async()=>{ try{ await enableBio(); sessionStorage.removeItem("offerBio"); listView(); }catch(e){ by.textContent="مقدرناش، جرّب من الإعدادات"; } };
+  const bn = view.querySelector("#bioNo"); if(bn) bn.onclick = ()=>{ sessionStorage.removeItem("offerBio"); listView(); };
 }
 
 async function leadView(id){

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b2a5b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="عملاء دبي">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<title>عملاء دبي</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#16202f;--mut:#6b7486;--pri:#1f6feb;--navy:#0b2a5b;--line:#e4e8ef;--ok:#137333;--warn:#b06000;--bad:#c5221f}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:10px}
+header h1{font-size:18px;margin:0;flex:1}
+header button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:10px;padding:8px 10px;font-size:13px}
+main{padding:12px;max-width:640px;margin:0 auto}
+.card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:6px}
+.tabs button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 12px;font-size:13px;color:var(--ink)}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.lead{display:flex;gap:10px;align-items:center}
+.lead .av{width:42px;height:42px;border-radius:50%;background:#e8effc;color:var(--pri);display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 auto}
+.lead .t{flex:1;min-width:0}
+.lead .n{font-weight:700;font-size:15px}
+.lead .s{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-block;font-size:11.5px;border-radius:12px;padding:2px 8px;background:#eef1f6;color:var(--mut)}
+.pill.new{background:#e8f0fe;color:var(--pri)}.pill.won{background:#e6f4ea;color:var(--ok)}.pill.lost,.pill.broker{background:#fce8e6;color:var(--bad)}.pill.interested,.pill.viewing{background:#fef7e0;color:var(--warn)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:var(--pri);color:#fff;flex:1;text-align:center;text-decoration:none}
+.btn.g{background:#25d366}.btn.l{background:#eef1f6;color:var(--ink)}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv:last-child{border:0}.kv b{color:var(--mut);font-weight:500}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.st button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 2px;font-size:12.5px}
+.st button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+input,textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fff;margin:4px 0 10px}
+textarea{min-height:70px}
+label{font-size:13px;color:var(--mut)}
+.note{border-right:3px solid var(--pri);padding:6px 10px;margin:8px 0;background:#f7f9fc;border-radius:6px;font-size:14px}
+.note small{display:block;color:var(--mut);font-size:11.5px}
+.empty{text-align:center;color:var(--mut);padding:40px 10px}
+.banner{background:#fff4e5;border:1px solid #f9d9a6;color:#7a4b00;border-radius:12px;padding:12px;font-size:14px;margin-bottom:10px}
+.banner.ok{background:#e6f4ea;border-color:#b7dfc1;color:#0d5a26}
+.badge{background:var(--bad);color:#fff;border-radius:10px;padding:0 7px;font-size:12px;margin-right:4px}
+.hidden{display:none!important}
+.center{max-width:380px;margin:30px auto}
+.err{color:var(--bad);font-size:14px;min-height:20px}
+a.link{color:var(--pri);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <button id="backBtn" class="hidden">→</button>
+  <h1 id="title">عملاء دبي</h1>
+  <button id="refreshBtn" class="hidden">تحديث</button>
+  <button id="menuBtn" class="hidden">⚙︎</button>
+</header>
+<main id="view"></main>
+
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+const URL_ = "https://qeushgyngveloqlgvdzg.supabase.co";
+const KEY = "sb_publishable_62MmrfPqBg-no79xn0HvFA_b7VhlQa4";
+const VAPID = "BMV0dCIvzyCS5vrptD9BBaB0mnw-sVXuMc3uxeiVAOqqlF8xhEvBBDPkOVNvK2maoK-kG6CvZaljqZh0bGVUSkQ";
+const sb = createClient(URL_, KEY, { auth: { persistSession: true, autoRefreshToken: true } });
+
+const STATUS = { new:"جديد", contacted:"اتكلمنا", no_answer:"مردش", interested:"مهتم", viewing:"معاينة", won:"اتباع ✓", lost:"مش مهتم", broker:"وسيط" };
+const ANSWER_LABELS = {}; // filled automatically from question keys
+const $ = (h) => { const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstElementChild; };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const view = document.getElementById("view");
+let me = null, leads = [], filter = "new", channel = null;
+
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");
+
+function ago(t){ if(!t) return ""; const m=Math.round((Date.now()-new Date(t))/60000);
+  if(m<1) return "دلوقتي"; if(m<60) return `من ${m} دقيقة`; const h=Math.round(m/60); if(h<24) return `من ${h} ساعة`; return new Date(t).toLocaleDateString("ar-EG",{day:"numeric",month:"short"}); }
+const label = (k) => k.replace(/_/g," ").replace(/\?$/,"") + "؟";
+const digits = (p) => String(p||"").replace(/[^\d]/g,"");
+
+function header(title, back=false){
+  document.getElementById("title").textContent = title;
+  document.getElementById("backBtn").classList.toggle("hidden", !back);
+  document.getElementById("refreshBtn").classList.toggle("hidden", back || !me);
+  document.getElementById("menuBtn").classList.toggle("hidden", back || !me);
+}
+document.getElementById("backBtn").onclick = () => { location.hash = ""; };
+document.getElementById("refreshBtn").onclick = () => loadLeads();
+document.getElementById("menuBtn").onclick = () => { location.hash = "settings"; };
+
+// ---------- auth: one-time invite (code + password) ----------
+async function team(action, body={}){
+  const { data:{ session } } = await sb.auth.getSession();
+  const r = await fetch(`${URL_}/functions/v1/team?action=${action}`,{method:"POST",
+    headers:{"Content-Type":"application/json",apikey:KEY,...(session?{Authorization:`Bearer ${session.access_token}`}:{})},body:JSON.stringify(body)});
+  const j = await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||"حصل خطأ"); return j;
+}
+function loginView(){
+  header("عملاء دبي");
+  view.innerHTML = "";
+  const v = $(`<div class="center card">
+    <h2 style="margin-top:0">أهلاً 👋</h2>
+    <p style="color:var(--mut);font-size:14px;margin-top:0">اكتب كود الدعوة والباسورد اللي وصلوك.</p>
+    <label>كود الدعوة</label><input id="code" dir="ltr" autocapitalize="characters" autocomplete="off" placeholder="XXXX-XXXX">
+    <label>الباسورد</label><input id="pw" type="password" inputmode="numeric" dir="ltr" autocomplete="one-time-code">
+    <div class="err" id="err"></div>
+    <button class="btn" id="go" style="width:100%">دخول</button>
+    <p style="color:var(--mut);font-size:12.5px;text-align:center">الكود بيشتغل مرة واحدة بس وعلى موبايل واحد.</p>
+  </div>`);
+  view.append(v);
+  v.querySelector("#go").onclick = async () => {
+    const err = v.querySelector("#err"); err.textContent = ""; const b=v.querySelector("#go"); b.disabled=true;
+    try {
+      const s = await team("redeem",{ code:v.querySelector("#code").value, password:v.querySelector("#pw").value });
+      await sb.auth.setSession(s);
+      sessionStorage.setItem("unlocked","1");
+      await start(true);
+    } catch(e){ err.textContent = e.message; } finally { b.disabled=false; }
+  };
+}
+
+// ---------- Face ID / fingerprint lock (WebAuthn, on this device) ----------
+const BIO_KEY="bio_cred_id";
+const bioOn = () => { try { return !!localStorage.getItem(BIO_KEY); } catch { return false; } };
+const rnd = (n)=>crypto.getRandomValues(new Uint8Array(n));
+const b64u = (buf)=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+async function bioAvailable(){ try { return !!(window.PublicKeyCredential && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()); } catch { return false; } }
+async function enableBio(){
+  const cred = await navigator.credentials.create({ publicKey:{ challenge:rnd(32), rp:{ name:"عملاء دبي" },
+    user:{ id:rnd(16), name:me.display_name, displayName:me.display_name },
+    pubKeyCredParams:[{type:"public-key",alg:-7},{type:"public-key",alg:-257}],
+    authenticatorSelection:{ authenticatorAttachment:"platform", userVerification:"required", residentKey:"preferred" }, timeout:60000 }});
+  localStorage.setItem(BIO_KEY, b64u(cred.rawId));
+}
+async function bioUnlock(){
+  const id = localStorage.getItem(BIO_KEY);
+  const raw = Uint8Array.from(atob(id.replace(/-/g,"+").replace(/_/g,"/")),c=>c.charCodeAt(0));
+  await navigator.credentials.get({ publicKey:{ challenge:rnd(32), allowCredentials:[{type:"public-key",id:raw}], userVerification:"required", timeout:60000 }});
+}
+function lockView(){
+  header("عملاء دبي");
+  view.innerHTML = `<div class="center card" style="text-align:center"><div style="font-size:54px">🔒</div>
+    <h2>افتح ببصمتك</h2><div class="err" id="err"></div><button class="btn" id="un" style="width:100%">فتح</button></div>`;
+  const go = async()=>{ try{ await bioUnlock(); sessionStorage.setItem("unlocked","1"); start(true);}catch(e){ view.querySelector("#err").textContent="جرّب تاني"; } };
+  view.querySelector("#un").onclick = go; go();
+}
+let hiddenAt = 0;
+document.addEventListener("visibilitychange", ()=>{ if(document.hidden) hiddenAt=Date.now(); else if(bioOn() && me && Date.now()-hiddenAt>5*60*1000){ sessionStorage.removeItem("unlocked"); lockView(); } });
+
+async function start(fresh=false){
+  const { data:{ session } } = await sb.auth.getSession();
+  if (!session) return loginView();
+  const { data: m } = await sb.from("members").select("*").eq("user_id", session.user.id).maybeSingle();
+  if (!m || !m.active) { await sb.auth.signOut(); return loginView(); }
+  me = m;
+  if (bioOn() && !sessionStorage.getItem("unlocked")) return lockView();
+  if (fresh && !bioOn() && await bioAvailable()) {
+    if (confirm("تفعّل الدخول ببصمة الوش / الصباع على الموبايل ده؟")) { try { await enableBio(); } catch(e){ alert("مقدرناش نفعّل البصمة: "+e.message); } }
+  }
+  await loadLeads();
+  if (channel) sb.removeChannel(channel);
+  channel = sb.channel("leads").on("postgres_changes",{event:"*",schema:"public",table:"leads"},()=>loadLeads()).subscribe();
+}
+window.addEventListener("hashchange", route);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && me) loadLeads(); });
+
+async function loadLeads(){
+  const { data, error } = await sb.from("leads").select("*").order("created_at",{ascending:false}).limit(500);
+  if (!error) leads = data;
+  route();
+}
+
+// ---------- push ----------
+function b64ToU8(b){ const p="=".repeat((4-b.length%4)%4); const s=atob((b+p).replace(/-/g,"+").replace(/_/g,"/")); return Uint8Array.from([...s].map(c=>c.charCodeAt(0))); }
+async function pushState(){
+  if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) return "unsupported";
+  const reg = await navigator.serviceWorker.ready; const sub = await reg.pushManager.getSubscription();
+  if (sub && Notification.permission==="granted") return "on";
+  return Notification.permission==="denied" ? "denied" : "off";
+}
+async function enablePush(){
+  const perm = await Notification.requestPermission();
+  if (perm !== "granted") return alert("لازم توافق على الإشعارات من إعدادات الموبايل");
+  const reg = await navigator.serviceWorker.ready;
+  let sub = await reg.pushManager.getSubscription();
+  if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey:b64ToU8(VAPID) });
+  const j = sub.toJSON();
+  await sb.from("push_subscriptions").upsert({ user_id:me.user_id, endpoint:j.endpoint, p256dh:j.keys.p256dh, auth:j.keys.auth, user_agent:navigator.userAgent },{ onConflict:"endpoint" });
+  route();
+}
+async function testPush(){
+  const { data:{ session } } = await sb.auth.getSession();
+  const r = await fetch(`${URL_}/functions/v1/leads?action=test-push`,{method:"POST",headers:{Authorization:`Bearer ${session.access_token}`,apikey:KEY}});
+  const j = await r.json(); if(!j.sent) alert("مفيش جهاز متسجل للإشعارات. فعّل الإشعارات الأول.");
+}
+
+// ---------- views ----------
+async function route(){
+  if (!me) return;
+  if (bioOn() && !sessionStorage.getItem("unlocked")) return lockView();
+  const h = location.hash.slice(1);
+  if (h === "team" && me.role==="admin") return teamView();
+  if (h.startsWith("lead/")) return leadView(h.slice(5));
+  if (h === "settings") return settingsView();
+  listView();
+}
+
+async function pushBanner(){
+  const st = await pushState();
+  if (st==="on") return "";
+  if (isIOS && !standalone) return `<div class="banner">📲 علشان الإشعارات توصلك على الآيفون: دوس زرار <b>المشاركة</b> تحت ⬆️ وبعدين <b>Add to Home Screen</b>، وافتح التطبيق من الشاشة الرئيسية.</div>`;
+  if (st==="unsupported") return `<div class="banner">المتصفح ده مش بيدعم الإشعارات. افتح اللينك من Chrome (أندرويد) أو Safari (آيفون).</div>`;
+  if (st==="denied") return `<div class="banner">الإشعارات مقفولة. افتحها من إعدادات الموبايل للتطبيق ده.</div>`;
+  return `<div class="banner">🔔 فعّل الإشعارات علشان يوصلك كل عميل جديد في نفس اللحظة <button class="btn" id="pushOn" style="margin-top:8px;width:100%">تفعيل الإشعارات</button></div>`;
+}
+
+async function listView(){
+  header("عملاء دبي");
+  const counts = Object.fromEntries(Object.keys(STATUS).map(k=>[k,leads.filter(l=>l.status===k).length]));
+  const tabs = [["new","جديد"],["all","الكل"],["contacted","اتكلمنا"],["no_answer","مردش"],["interested","مهتم"],["viewing","معاينة"],["won","اتباع"],["lost","مش مهتم"],["broker","وسطاء"],["followup","متابعة النهارده"]];
+  const today = new Date(); today.setHours(23,59,59);
+  const list = leads.filter(l => filter==="all" ? true : filter==="followup" ? (l.next_follow_up && new Date(l.next_follow_up)<=today && !["won","lost","broker"].includes(l.status)) : l.status===filter);
+  view.innerHTML = (await pushBanner()) + `<div class="tabs">${tabs.map(([k,t])=>`<button data-f="${k}" class="${filter===k?"on":""}">${t}${counts[k]&&k==="new"?`<span class="badge">${counts[k]}</span>`:""}</button>`).join("")}</div>`
+    + (list.length ? list.map(l=>{
+      const a = l.answers||{}; const sub = Object.values(a).slice(0,2).join(" · ");
+      return `<div class="card lead" data-id="${l.id}"><div class="av">${esc((l.full_name||"؟").trim()[0]||"؟")}</div>
+        <div class="t"><div class="n">${esc(l.full_name||"بدون اسم")}</div><div class="s">${esc(sub||l.phone)}</div></div>
+        <div style="text-align:left"><span class="pill ${l.status}">${STATUS[l.status]}</span><div class="s" style="margin-top:4px">${ago(l.created_at)}</div></div></div>`;
+    }).join("") : `<div class="empty">مفيش عملاء هنا لسه</div>`);
+  view.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{filter=b.dataset.f; listView();});
+  view.querySelectorAll(".lead").forEach(c=>c.onclick=()=>{location.hash="lead/"+c.dataset.id;});
+  const p = view.querySelector("#pushOn"); if(p) p.onclick = enablePush;
+}
+
+async function leadView(id){
+  header("تفاصيل العميل", true);
+  let l = leads.find(x=>x.id===id);
+  if (!l){ const { data } = await sb.from("leads").select("*").eq("id",id).maybeSingle(); l=data; }
+  if (!l){ view.innerHTML = `<div class="empty">العميل مش موجود</div>`; return; }
+  const { data: notes } = await sb.from("lead_notes").select("*, members(display_name)").eq("lead_id",id).order("created_at",{ascending:false});
+  const ph = digits(l.phone);
+  const fu = l.next_follow_up ? new Date(l.next_follow_up) : null;
+  const fuVal = fu ? new Date(fu.getTime()-fu.getTimezoneOffset()*60000).toISOString().slice(0,16) : "";
+  view.innerHTML = `
+  ${l.is_broker?`<div class="banner">⚠️ العميل ده اختار إنه <b>وسيط عقاري</b></div>`:""}
+  <div class="card"><div class="lead"><div class="av">${esc((l.full_name||"؟")[0])}</div><div class="t"><div class="n">${esc(l.full_name||"بدون اسم")}</div><div class="s" dir="ltr" style="text-align:right">${esc(l.phone)}</div></div></div>
+    <div class="btns" style="margin-top:12px"><a class="btn" href="tel:+${ph}">📞 اتصال</a><a class="btn g" href="https://wa.me/${ph}" target="_blank">واتساب</a></div></div>
+  <div class="card"><label>الحالة</label><div class="st" style="margin-top:6px">${Object.entries(STATUS).map(([k,t])=>`<button data-s="${k}" class="${l.status===k?"on":""}">${t}</button>`).join("")}</div></div>
+  <div class="card">${Object.entries(l.answers||{}).map(([k,v])=>`<div class="kv"><b>${esc(label(k))}</b><span>${esc(v)}</span></div>`).join("")}
+    ${l.email?`<div class="kv"><b>الإيميل</b><span dir="ltr">${esc(l.email)}</span></div>`:""}
+    <div class="kv"><b>جه من</b><span>${esc(l.ad_name||l.campaign_name||"—")}${l.platform?` · ${esc(l.platform)}`:""}</span></div>
+    <div class="kv"><b>وقت التسجيل</b><span>${new Date(l.meta_created_at||l.created_at).toLocaleString("ar-EG")}</span></div></div>
+  <div class="card"><label>ميعاد المتابعة الجاية</label><input type="datetime-local" id="fu" value="${fuVal}">
+    <label>ملاحظة جديدة</label><textarea id="nt" placeholder="مثلاً: ميزانيته 700 ألف، عاوز استوديو جاهز، هيعاين الخميس"></textarea>
+    <button class="btn" id="save" style="width:100%">حفظ</button>
+    ${(notes||[]).map(n=>`<div class="note">${esc(n.body)}<small>${esc(n.members?.display_name||"")} · ${ago(n.created_at)}</small></div>`).join("")}</div>`;
+  view.querySelectorAll("[data-s]").forEach(b=>b.onclick=async()=>{ await sb.from("leads").update({status:b.dataset.s}).eq("id",id); l.status=b.dataset.s; await loadLeads(); });
+  view.querySelector("#save").onclick = async () => {
+    const body = view.querySelector("#nt").value.trim(); const f = view.querySelector("#fu").value;
+    await sb.from("leads").update({ next_follow_up: f ? new Date(f).toISOString() : null }).eq("id",id);
+    if (body) await sb.from("lead_notes").insert({ lead_id:id, body, author:me.user_id });
+    await loadLeads();
+  };
+  if (l.status==="new"){ /* opening a new lead doesn't change status automatically */ }
+}
+
+async function settingsView(){
+  header("الإعدادات", true);
+  const st = await pushState();
+  view.innerHTML = `<div class="card"><div class="kv"><b>الاسم</b><span>${esc(me.display_name)}</span></div><div class="kv"><b>الصلاحية</b><span>${me.role==="admin"?"أدمن":"موظف"}</span></div></div>
+  <div class="card"><div class="kv"><b>الإشعارات على الجهاز ده</b><span>${st==="on"?"✅ شغالة":"❌ مش شغالة"}</span></div>
+    <div class="btns" style="margin-top:10px">${st==="on"?`<button class="btn l" id="tp">جرّب إشعار</button>`:`<button class="btn" id="en">تفعيل الإشعارات</button>`}</div></div>
+  <div class="card"><div class="kv"><b>الدخول بالبصمة / Face ID</b><span>${bioOn()?"✅ متفعّل":"❌ مش متفعّل"}</span></div>
+    ${bioOn()?`<button class="btn l" id="bioOff" style="width:100%;margin-top:8px">إلغاء البصمة</button>`:`<button class="btn" id="bioOn" style="width:100%;margin-top:8px">تفعيل البصمة</button>`}</div>
+  ${me.role==="admin"?`<div class="card"><button class="btn" id="teamBtn" style="width:100%">👥 الفريق والدعوات</button></div>`:""}
+  <div class="card"><button class="btn l" id="csv" style="width:100%">تنزيل كل العملاء (Excel/CSV)</button></div>
+  <div class="card"><button class="btn l" id="out" style="width:100%;color:var(--bad)">تسجيل خروج</button>
+    <p style="color:var(--mut);font-size:12.5px;margin-bottom:0">لو خرجت، هتحتاج كود دعوة جديد من الأدمن علشان تدخل تاني.</p></div>`;
+  const tp=view.querySelector("#tp"); if(tp) tp.onclick=testPush;
+  const bo=view.querySelector("#bioOn"); if(bo) bo.onclick=async()=>{ if(!await bioAvailable()) return alert("الموبايل ده مفيهوش بصمة أو Face ID متفعّل"); try{ await enableBio(); settingsView(); }catch(e){ alert(e.message);} };
+  const bf=view.querySelector("#bioOff"); if(bf) bf.onclick=()=>{ localStorage.removeItem(BIO_KEY); settingsView(); };
+  const tb=view.querySelector("#teamBtn"); if(tb) tb.onclick=()=>{ location.hash="team"; };
+  const en=view.querySelector("#en"); if(en) en.onclick=enablePush;
+  view.querySelector("#out").onclick = async()=>{ if(!confirm("متأكد؟ هتحتاج كود دعوة جديد علشان تدخل تاني.")) return; await sb.auth.signOut(); localStorage.removeItem(BIO_KEY); me=null; location.hash=""; loginView(); };
+  view.querySelector("#csv").onclick = () => {
+    const keys = [...new Set(leads.flatMap(l=>Object.keys(l.answers||{})))];
+    const rows = [["الاسم","التليفون","الإيميل","الحالة",...keys,"الإعلان","التاريخ"], ...leads.map(l=>[l.full_name,l.phone,l.email,STATUS[l.status],...keys.map(k=>(l.answers||{})[k]||""),l.ad_name||"",new Date(l.created_at).toLocaleString("en-GB")])];
+    const csv = "﻿"+rows.map(r=>r.map(c=>`"${String(c??"").replace(/"/g,'""')}"`).join(",")).join("\n");
+    const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download="leads.csv"; a.click();
+  };
+}
+
+async function teamView(){
+  header("الفريق والدعوات", true);
+  view.innerHTML = `<div class="empty">جاري التحميل…</div>`;
+  let d; try { d = await team("list"); } catch(e){ view.innerHTML = `<div class="empty">${esc(e.message)}</div>`; return; }
+  view.innerHTML = `
+  <div class="card"><h3 style="margin-top:0">دعوة شخص جديد</h3>
+    <label>الاسم</label><input id="nm" placeholder="مثلاً: أحمد">
+    <label><input type="checkbox" id="adm" style="width:auto;margin:0 0 0 6px">أدمن (يقدر يعمل دعوات ويوقف ناس)</label>
+    <button class="btn" id="mk" style="width:100%;margin-top:10px">اعمل كود دعوة</button>
+    <div id="out"></div></div>
+  <div class="card"><h3 style="margin-top:0">الفريق</h3>
+    ${(d.members||[]).map(m=>`<div class="kv"><span>${esc(m.display_name)} ${m.role==="admin"?'<span class="pill">أدمن</span>':""} ${m.active?"":'<span class="pill lost">موقوف</span>'}<br><small style="color:var(--mut)">${m.last_seen?"آخر ظهور "+ago(m.last_seen):""}</small></span>
+      <span>${m.user_id===me.user_id?"(إنت)":`<button class="btn l" style="padding:6px 10px;font-size:13px" data-reset="${m.user_id}" data-name="${esc(m.display_name)}">كود جديد</button>
+      <button class="btn l" style="padding:6px 10px;font-size:13px;color:${m.active?"var(--bad)":"var(--ok)"}" data-tg="${m.user_id}" data-on="${m.active?0:1}">${m.active?"إيقاف":"تفعيل"}</button>`}</span></div>`).join("")}</div>
+  <div class="card"><h3 style="margin-top:0">دعوات لسه متستخدمتش</h3>
+    ${(d.invites||[]).length?(d.invites).map(i=>`<div class="kv"><span>${esc(i.display_name)}<br><small style="color:var(--mut)">بتنتهي ${new Date(i.expires_at).toLocaleString("ar-EG")}</small></span><button class="btn l" style="padding:6px 10px;font-size:13px;color:var(--bad)" data-cancel="${i.id}">إلغاء</button></div>`).join(""):'<div style="color:var(--mut)">مفيش</div>'}</div>`;
+  const show = (r, name) => {
+    const msg = `أهلاً ${name} 👋\nده تطبيق عملاء دبي:\n${location.origin+location.pathname}\n\nكود الدعوة: ${r.code}\nالباسورد: ${r.password}\n\n(الكود بيشتغل مرة واحدة بس، وبينتهي بعد 48 ساعة)`;
+    view.querySelector("#out").innerHTML = `<div class="banner ok" style="margin-top:12px;white-space:pre-wrap;direction:rtl">${esc(msg)}</div>
+      <div class="btns"><button class="btn" id="cp">نسخ الرسالة</button><a class="btn g" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank">ابعت واتساب</a></div>
+      <p style="color:var(--mut);font-size:12.5px">الكود والباسورد مش هيظهروا تاني. ابعتهم دلوقتي.</p>`;
+    view.querySelector("#cp").onclick = ()=>navigator.clipboard.writeText(msg).then(()=>alert("اتنسخت"));
+  };
+  view.querySelector("#mk").onclick = async()=>{ const name=view.querySelector("#nm").value.trim(); if(!name) return alert("اكتب الاسم");
+    try{ const r=await team("create-invite",{name,role:view.querySelector("#adm").checked?"admin":"agent"}); show(r,name);}catch(e){alert(e.message);} };
+  view.querySelectorAll("[data-reset]").forEach(b=>b.onclick=async()=>{ if(!confirm(`كود جديد لـ ${b.dataset.name}؟ (لو غيّر موبايله أو خرج)`)) return;
+    try{ const r=await team("create-invite",{name:b.dataset.name,user_id:b.dataset.reset}); window.scrollTo(0,0); show(r,b.dataset.name);}catch(e){alert(e.message);} });
+  view.querySelectorAll("[data-tg]").forEach(b=>b.onclick=async()=>{ if(!confirm(b.dataset.on==="1"?"تفعيل الشخص ده تاني؟":"إيقاف الشخص ده؟ مش هيقدر يفتح التطبيق خالص.")) return;
+    try{ await team(b.dataset.on==="1"?"activate":"deactivate",{user_id:b.dataset.tg}); teamView(); }catch(e){alert(e.message);} });
+  view.querySelectorAll("[data-cancel]").forEach(b=>b.onclick=async()=>{ await team("cancel-invite",{id:b.dataset.cancel}); teamView(); });
+}
+
+sb.auth.onAuthStateChange((e)=>{ if(e==="SIGNED_OUT"){ me=null; } });
+start();
+</script>
+</body>
+</html>

@@ -45,7 +45,7 @@ main{padding:12px;max-width:640px;margin:0 auto}
 select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230b1f3a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat;background-position:right 12px center}
 [dir=rtl] select{background-position:left 12px center}
 .pill.new{background:#0b1f3a;color:#fff}
-.pill.lost,.pill.broker{border-color:#bbb;color:#888}
+.pill.lost{border-color:#bbb;color:#888}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #0b1f3a;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:700;background:#0b1f3a;color:#fff;flex:1;text-align:center;text-decoration:none;font-family:inherit}
 .btn.l{background:#fff;color:#0b1f3a;border-color:var(--line)}
@@ -156,7 +156,7 @@ const T = {
   noLeads:"لا يوجد عملاء هنا بعد.", noName:"بدون اسم",
   ocTitleCall:"ما نتيجة المكالمة؟", ocTitleWa:"ما نتيجة المحادثة على واتساب؟", oc:{no_answer:"لم يرد",contacted:"رد وتم التواصل",interested:"مهتم",viewing:"حجز معاينة",lost:"غير مهتم"}, skipLog:"إغلاق دون تسجيل", nextTitle:"متى المتابعة القادمة؟", viewTitle:"متى موعد المعاينة؟", in2h:"بعد ساعتين", tom11:"غدًا 11 صباحًا", in2d:"بعد يومين", in1w:"بعد أسبوع", noDate:"بدون موعد", pickDate:"أو اختر موعدًا", logBtn:"تسجيل نتيجة تواصل", attempts:"محاولات الاتصال: {n}", lastTry:"آخر محاولة {x}", actCall:"مكالمة", actWa:"واتساب", history:"سجل التواصل والملاحظات", pastDate:"لا يمكن اختيار موعد في وقت مضى. اختر موعدًا قادمًا.", owner:"المسؤول", unassigned:"غير محدد", overdue:"متأخرة", today:"اليوم", tomorrow:"غدًا", dayAfter:"بعد غد", thisWeek:"خلال الأسبوع", later:"لاحقًا", late:"متأخر", daysLate:"متأخر {n} يوم", lateToday:"فات موعدها اليوم", whoAll:"جميع الفريق", mine:"المسندة إليّ", noFollow:"لا توجد متابعات مجدولة.", showFor:"عرض متابعات",
   leadTitle:"تفاصيل العميل", call:"اتصال", whatsapp:"واتساب", stat:"الحالة",
-  brokerWarn:"اختار هذا العميل أنه وسيط عقاري.", email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
+  email:"البريد الإلكتروني", source:"المصدر", time:"وقت التسجيل",
   followup:"موعد المتابعة القادم", newNote:"ملاحظة جديدة", notePh:"مثال: الميزانية 700 ألف، يريد استوديو جاهزًا، المعاينة يوم الخميس.", save:"حفظ", notFound:"العميل غير موجود.",
   name:"الاسم", role:"الصلاحية", admin:"مسؤول", agent:"موظف",
   pushOnDevice:"الإشعارات على هذا الجهاز", on:"مفعّلة", off:"غير مفعّلة", testPush:"تجربة إشعار", noDevice:"لا يوجد جهاز مسجّل للإشعارات. فعّل الإشعارات أولًا.",
@@ -191,7 +191,7 @@ const T = {
   noLeads:"No leads here yet.", noName:"No name",
   ocTitleCall:"How did the call go?", ocTitleWa:"How did the WhatsApp chat go?", oc:{no_answer:"No answer",contacted:"Answered, spoke",interested:"Interested",viewing:"Booked a viewing",lost:"Not interested"}, skipLog:"Close without logging", nextTitle:"When is the next follow-up?", viewTitle:"When is the viewing?", in2h:"In 2 hours", tom11:"Tomorrow 11 AM", in2d:"In 2 days", in1w:"In a week", noDate:"No date", pickDate:"Or pick a time", logBtn:"Log contact outcome", attempts:"Call attempts: {n}", lastTry:"last {x}", actCall:"Call", actWa:"WhatsApp", history:"Contact history & notes", pastDate:"You can't pick a time in the past. Choose an upcoming time.", owner:"Assigned to", unassigned:"Unassigned", overdue:"Overdue", today:"Today", tomorrow:"Tomorrow", dayAfter:"Day after tomorrow", thisWeek:"Later this week", later:"Later", late:"Late", daysLate:"{n} day(s) late", lateToday:"Missed today", whoAll:"Whole team", mine:"Assigned to me", noFollow:"No follow-ups scheduled.", showFor:"Show follow-ups for",
   leadTitle:"Lead details", call:"Call", whatsapp:"WhatsApp", stat:"Status",
-  brokerWarn:"This lead said they are a real-estate broker.", email:"Email", source:"Source", time:"Submitted",
+  email:"Email", source:"Source", time:"Submitted",
   followup:"Next follow-up", newNote:"New note", notePh:"e.g. Budget 700K, wants a ready studio, viewing on Thursday.", save:"Save", notFound:"Lead not found.",
   name:"Name", role:"Role", admin:"Admin", agent:"Agent",
   pushOnDevice:"Notifications on this device", on:"On", off:"Off", testPush:"Send test notification", noDevice:"No device registered. Turn on notifications first.",
@@ -394,7 +394,7 @@ function leadCard(l, extra=""){
 }
 function followupsHtml(){
   let who = "all"; try { who = sessionStorage.getItem("who") || "all"; } catch {}
-  const fl = leads.filter(l => l.next_follow_up && !["won","lost","broker"].includes(l.status)
+  const fl = leads.filter(l => l.next_follow_up && !["won","lost"].includes(l.status)
       && (who==="all" || (who==="me" ? l.assigned_to===me.user_id : l.assigned_to===who)))
     .sort((a,b)=> new Date(a.next_follow_up) - new Date(b.next_follow_up));
   const sod = new Date(); sod.setHours(0,0,0,0); const DAY = 86400000, now = Date.now();
@@ -422,7 +422,7 @@ async function listView(){
   const tb = T[LANG].tabs;
   const counts = Object.fromEntries(Object.keys(T.ar.status).map(k=>[k,leads.filter(l=>l.status===k).length]));
   const today = new Date(); today.setHours(23,59,59);
-  const due = (l)=> l.next_follow_up && new Date(l.next_follow_up)<=today && !["won","lost","broker"].includes(l.status);
+  const due = (l)=> l.next_follow_up && new Date(l.next_follow_up)<=today && !["won","lost"].includes(l.status);
   counts.followup = leads.filter(due).length;
   const list = leads.filter(l => filter==="all" ? true : filter==="followup" ? due(l) : l.status===filter);
   const keys = ["new","all","contacted","no_answer","interested","viewing","won","lost","broker","followup"];
@@ -448,7 +448,6 @@ async function leadView(id){
   const fu = l.next_follow_up ? new Date(l.next_follow_up) : null;
   const fuVal = fu ? new Date(fu.getTime()-fu.getTimezoneOffset()*60000).toISOString().slice(0,16) : "";
   view.innerHTML = `
-  ${l.is_broker?`<div class="banner dark"><span class="lbl">${ic("alert")}${t("brokerWarn")}</span></div>`:""}
   <div class="card"><div class="lead"><div class="av">${initial(l.full_name)}</div><div class="t"><div class="n">${esc(l.full_name||t("noName"))}</div><div class="s" dir="ltr" style="text-align:start">${esc(l.phone)}</div></div></div>
     <div class="btns" style="margin-top:12px"><a class="btn" id="callBtn" href="tel:+${ph}">${ic("phone")}${t("call")}</a><a class="btn o" id="waBtn" href="https://wa.me/${ph}" target="_blank">${ic("chat")}${t("whatsapp")}</a></div>
     <button class="btn l" id="logBtn" style="width:100%;margin-top:8px">${ic("check")}${t("logBtn")}</button>
